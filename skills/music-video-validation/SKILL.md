@@ -44,7 +44,7 @@ Pre-generation validation gate (Stage 8). Runs all prerequisite checks before GP
      - Duration within [2s, 18s] generation limits.
      - Two-tier continuity check:
        - Tier 1 (BLOCKING): Deterministic string matching on invariance rules.
-       - Tier 2 (WARNING): LLM-based semantic check (deferred until slingshot integration).
+       - Tier 2 (WARNING): LLM-based semantic check (deferred).
 
 2. If any check fails, report specific missing items and block generation.
 

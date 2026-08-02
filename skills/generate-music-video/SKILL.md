@@ -6,11 +6,6 @@ allowed-tools:
   - Write
   - Edit
   - Bash
-  - mcp__gpu-manager__alice_generate_music_video
-  - mcp__gpu-manager__music_video_generate_refs
-  - mcp__gpu-manager__music_video_generate_clips
-  - mcp__gpu-manager__alice_gpu_status
-  - mcp__gpu-manager__alice_ensure_service_ready
 ---
 
 # /generate-music-video
@@ -32,7 +27,7 @@ shot list, reference image approval, prompt generation, pre-generation validatio
 `/generate-music-video` remains available for quick, automated runs.
 
 ## Two modes
-- **Auto** — `alice_generate_music_video`: one-shot, fully automated. Quick draft only.
+- **Auto** — fully automated one-shot pipeline. Quick draft only.
 - **Controlled** (recommended) — `music_video_generate_refs` -> user approves per-beat refs -> `music_video_generate_clips`. Per-beat creative control.
 
 ## Collect these human inputs FIRST
@@ -51,12 +46,19 @@ shot list, reference image approval, prompt generation, pre-generation validatio
 - Creative inputs: `storyconcept.txt`, `subjectsandscenes.txt`, `themestyle.txt`, `index.md`
 - Outputs: `stems/`, `refs/`, `segment_plan.json`, `clips/`, `final_output.mp4`
 
-## MCP tools
-| Tool | Purpose | Key args |
-|------|---------|----------|
-| `alice_generate_music_video` | Auto one-shot | input_audio_path, output_dir, portrait_path, scene_prompt, max_segment_s, width=960, height=544 |
-| `music_video_generate_refs` | Controlled: stages 1-4.5 | + optional storyconcept_path / themestyle_path / subjectsandscenes_path / lyrics_path |
-| `music_video_generate_clips` | Controlled: stages 4-5 | output_dir (reads width/height from segment_plan.json) |
+## Pipeline Entry Points
+
+The pipeline can be invoked via MCP tools (if configured) or directly through the CLI.
+
+| Mode | Entry Point | Key Args |
+|------|-------------|----------|
+| Auto (one-shot) | `generate_music_video_pipeline.py` | input_audio_path, output_dir, portrait_path, scene_prompt, max_segment_s, width=960, height=544 |
+| Controlled: refs | `music_video_generate_refs` (MCP) or CLI | + optional storyconcept_path / themestyle_path / subjectsandscenes_path / lyrics_path |
+| Controlled: clips | `music_video_generate_clips` (MCP) or CLI | output_dir (reads width/height from segment_plan.json) |
+
+> **Alice implementation note:** In the private Alice environment, MCP tools
+> (`alice_generate_music_video`, `music_video_generate_refs`, `music_video_generate_clips`)
+> wrap the CLI entry points and handle GPU lifecycle management automatically.
 
 ## Direct local launch (no MCP)
 
@@ -70,19 +72,33 @@ uv run python scripts/generate_music_video_pipeline.py \
     --width 960 --height 544 --two-stage
 ```
 
-The `gpu-manager` MCP tools handle `LD_LIBRARY_PATH` automatically. For direct CLI runs,
-inject the uv-venv nvidia lib dirs at launch time (see `reference_mv_pipeline_run_libcublas_gotcha.md`).
+The `mv_audio` module handles `LD_LIBRARY_PATH` automatically. For direct CLI runs,
+inject the uv-venv NVIDIA library directories at launch time
+(see `reference_mv_pipeline_run_libcublas_gotcha.md`).
 
 ## Controlled-run recipe
 1. Ensure portrait + audio exist; write creative-input files if B-roll/narrative wanted.
-2. `music_video_generate_refs` with creative-input paths. Returns `segment_plan.json` + `ref_images`.
+2. Run reference image generation (stages 1-4.5) with creative-input paths.
+   Returns `segment_plan.json` + `ref_images`.
 3. Show the user the ref images / segment plan; get approval.
-4. `music_video_generate_clips` on the same `output_dir`.
+4. Run clip generation (stages 4-5) on the same `output_dir`.
 5. Verify: `ffprobe` the `final_output.mp4` (codec, duration matches audio, resolution).
 
-## Slingshot / VRAM notes
-- Pipeline hibernates local LLM during clip gen. Long idle stages are expected.
-- Check `alice_gpu_status` before a run; ensure ComfyUI/LTX services are free.
+## GPU Lifecycle Management
+
+The pipeline may require exclusive GPU access during clip generation. If your
+environment runs a local LLM alongside the video generation pipeline, a GPU
+lifecycle manager can suspend the LLM before rendering and restore it afterward.
+
+- Check GPU availability before a run; ensure ComfyUI/LTX services are free.
+- If no GPU lifecycle manager is configured, the pipeline proceeds normally —
+  VRAM contention is the operator's responsibility.
+- Long idle stages during clip generation are expected.
+
+> **Alice implementation note:** In the private Alice environment, a GPU lifecycle
+> manager automatically hibernates the local LLM before clip generation and restores
+> it afterward. This behaviour is specific to Alice's deployment and is not required
+> by the public pipeline.
 
 ## Additional operational detail
 

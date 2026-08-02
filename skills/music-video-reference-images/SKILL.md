@@ -6,9 +6,6 @@ allowed-tools:
   - Write
   - Edit
   - Bash
-  - mcp__gpu-manager__alice_image_to_image
-  - mcp__gpu-manager__alice_gpu_status
-  - mcp__gpu-manager__alice_ensure_service_ready
 ---
 
 # Keyframe Generation & Approval Skill (Stage 6)
@@ -158,7 +155,7 @@ For each shot, construct a QEI prompt incorporating:
 
 ### Step 6: Generate Keyframe Candidates
 
-Use `alice_image_to_image` MCP tool (QEI) to generate keyframe candidates:
+Use the configured image generation pipeline (QEI) to generate keyframe candidates:
 
 - **Model:** `qwen-gguf-q3` (9GB VRAM, default for keyframe variants)
 - **Steps:** 20 for production keyframes (quality path, cfg=4.0)
@@ -263,7 +260,9 @@ Only generate keyframe candidates for pending shots.
 2. **Canonical portraits must be real photos.** AI-generated portraits drift from canonical identity. Only a real photo produces correct facial identity. QEI generates shot-specific keyframes FROM the real portrait — the portrait itself is never AI-generated.
 3. **QEI generates keyframes, not identity.** QEI's job is to adapt the canonical portrait to each shot's framing, lighting, environment, and continuity state. It does not create new identities.
 4. **Environment-only shots need no character keyframe.** Landscape, atmospheric, and empty-environment shots use LTX prompts + environment description without character reference images.
-5. **All GPU operations go through slingshot.** QEI image generation uses `alice_image_to_image` MCP which internally routes through the GPU via slingshot.
+5. **GPU lifecycle management.** QEI image generation requires GPU access. If your
+   environment runs a GPU lifecycle manager, it handles resource allocation. If not,
+   ensure sufficient VRAM is available before generating keyframe candidates.
 
 ## Output
 

@@ -6,11 +6,6 @@ allowed-tools:
   - Write
   - Edit
   - Bash
-  - mcp__gpu-manager__alice_generate_music_video
-  - mcp__gpu-manager__music_video_generate_refs
-  - mcp__gpu-manager__music_video_generate_clips
-  - mcp__gpu-manager__alice_gpu_status
-  - mcp__gpu-manager__alice_ensure_service_ready
 ---
 
 # /music-video-generation
@@ -116,4 +111,20 @@ Do not implement inline state updates.
 
 ## GPU Operations
 
-All GPU operations (video clip generation) go through slingshot — global rule. Use `/slingshot/exec` for GPU calls.
+### GPU Lifecycle Management
+
+Video clip generation requires substantial GPU resources. If your environment runs
+other GPU workloads (e.g., a local LLM), a GPU lifecycle manager can suspend them
+before generation and restore them afterward, ensuring restoration even after
+abnormal termination.
+
+- If a GPU lifecycle manager is configured, it handles LLM hibernate/wake automatically.
+- If no GPU lifecycle manager is configured, the pipeline proceeds normally.
+  Ensure sufficient VRAM is available before starting generation.
+- Use the `mv_audio` module for any GPU-accelerated audio operations to ensure
+  correct CUDA library paths.
+
+> **Alice implementation note:** In the private Alice environment, a GPU lifecycle
+> manager automatically hibernates the local LLM before clip generation and restores
+> it afterward. This behaviour is specific to Alice's deployment and is not required
+> by the public pipeline.

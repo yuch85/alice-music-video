@@ -7,7 +7,7 @@ allowed-tools:
 
 # /ltx-prompting
 
-Rubric for composing `scene_prompt` strings passed to `alice_generate_dialogue_clip_ltx2`.
+Rubric for composing `scene_prompt` strings for LTX-2 video generation.
 The internal `_prepare_ltx_prompt()` helper applies these rules automatically for code
 callers — this skill is for humans composing prompts or auditing what the helper does.
 

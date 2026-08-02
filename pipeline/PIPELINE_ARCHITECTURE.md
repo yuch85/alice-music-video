@@ -417,4 +417,6 @@ Code: lines 1394-1421. Called after each successful clip generation.
 | `mv_black.py` | Black frame generation (fallback) |
 | `mv_lut.py` | LUT download, post-processing defaults |
 | `mv_post_filter.py` | FFmpeg filter chain builders |
-| `mv_slingshot.py` | Local LLM hibernate/wake during pipeline |
+| `mv_gpu_interface.py` | GPU lifecycle management abstraction |
+| `mv_gpu_manager.py` | GPU lifecycle management (default impl) |
+| `mv_gpu_noop.py` | No-op GPU lifecycle (public default) |

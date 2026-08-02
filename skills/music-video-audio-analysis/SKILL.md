@@ -37,7 +37,7 @@ This produces:
 - `vocals.wav` — isolated vocal stem (for Whisper transcription + LTX conditioning)
 - `instrumental.wav` — instrumental stem (for final assembly)
 
-**GPU call goes through slingshot** (`/slingshot/exec` endpoint). Do not run bare `uv run` — it fails with `libcubas.so.12` errors. Use the `mv_audio` module which handles the environment correctly.
+**GPU environment**: Do not run bare `uv run` for GPU-accelerated calls — the uv venv CUDA library paths may not include system NVIDIA libraries, causing `libcublas.so` errors. Use the `mv_audio` module which configures `LD_LIBRARY_PATH` correctly. If your environment uses a GPU lifecycle manager, ensure it is active before running.
 
 ### 2. Whisper Transcription
 
@@ -59,7 +59,7 @@ This produces:
 
 **CRITICAL — Transcript source tracking**: The `transcript.json` MUST include an `"audio_source"` field recording the exact file path that was transcribed (e.g., `"vocals.wav"`). Downstream stages use this to determine whether timestamps are song-relative (stem source) or video-absolute (full video source). If Whisper transcribes `vocals.wav`, timestamps start at song=0s and need a prologue offset to align with video time. If it transcribes the full video audio, timestamps are already in video time. Without this field, there is no way to detect misalignment.
 
-**GPU call goes through slingshot** (same libcublas constraint as Demucs).
+**GPU environment**: Same `LD_LIBRARY_PATH` requirement as Demucs — use the `mv_audio` module.
 
 ### 3. Verify Outputs
 
@@ -147,6 +147,6 @@ On success, transition `AUDIO_ANALYSIS` -> `APPROVED` which advances to `BEATS`.
 
 ## Failure Modes
 
-- **Demucs fails**: Check GPU availability via `alice_gpu_status`. Retry after ComfyUI idle.
+- **Demucs fails**: Check GPU availability. Retry after ComfyUI idle.
 - **Whisper fails**: Same GPU check. Also verify `vocals.wav` is non-silent.
-- **libcubas error**: Never run bare `uv run` — always use `mv_audio` module or slingshot. See `reference_mv_pipeline_run_libcubas_gotcha.md`.
+- **libcublas error**: Never run bare `uv run` — always use the `mv_audio` module which sets up `LD_LIBRARY_PATH` correctly. If your environment has a GPU lifecycle manager, it handles this automatically.

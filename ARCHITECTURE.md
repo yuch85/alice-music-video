@@ -184,7 +184,9 @@ pipeline/          Core pipeline modules
   mv_mvconst.py               Pipeline constants
   mv_utils.py                 Shared utilities
   mv_recovery.py              Recovery from failures
-  mv_slingshot.py             Pipeline launcher
+  mv_gpu_manager.py           GPU lifecycle management interface
+  mv_gpu_noop.py              No-op GPU lifecycle implementation
+  mv_gpu_interface.py         GPU lifecycle abstraction
   mv_black.py                 Black frames utility
 
 assemble/          Assembly and post-processing

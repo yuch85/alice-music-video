@@ -17,8 +17,20 @@ Video segments are intelligently routed to one of two physical backend diffusion
 *   **LTX-2.3 (I2V Cinematic):** Primary engine for all segments. Uses audio vocal stem conditioning for lip-sync on singing clips. Low-res base generation (960x544) combined with a VRGDG latent-to-latent upscaler (Path B) to produce pristine 1920x1080 cinematic video.
 *   **HuMo 14B (Fallback):** Available when vocal conditioning is unavailable or when explicitly overridden. Outputs at 848x480 native, upscaled to 1080p. Quality is inferior to LTX vocal conditioning.
 
-### 2.3 Slingshot VRAM Arbitration
-Orchestrating local LLMs alongside heavy video diffusion models on a single 48GB GPU requires dynamic context swapping. When the FSM shifts from *Planning* to *Execution*, the `Slingshot` service hibernates the local LLM, clearing VRAM for ComfyUI. Upon completion, the LLM is restored into memory to evaluate the FSM output.
+### 2.3 GPU Lifecycle Management
+
+Orchestrating local LLMs alongside heavy video diffusion models on a single GPU
+requires dynamic resource management. The pipeline provides a `mv_gpu_interface`
+abstraction for lifecycle operations: suspend competing GPU workloads before
+rendering, and restore them afterward (even after abnormal termination).
+
+The public pipeline ships with a no-op implementation (`mv_gpu_noop.py`) that
+proceeds without lifecycle management. Environments running concurrent GPU
+workloads can provide their own implementation of the interface.
+
+> **Alice implementation note:** In the private Alice environment, a dedicated
+> GPU lifecycle manager service handles LLM hibernate/wake during pipeline
+> execution. This implementation is specific to Alice's deployment.
 
 ### 2.4 Syntactic & Schema Resilience
 All inter-agent communication (JSON payloads, Markdown tables) is passed through an automatic repair layer. This compensates for LLM context truncation or hallucinated schema parameters by executing bracket balancing, trailing comma removal, and table column-padding.
