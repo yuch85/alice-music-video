@@ -24,7 +24,7 @@ from pathlib import Path
 from typing import Any
 
 from mv_comfyui_client import ComfyUIClient
-from mv_slingshot import GPU_MANAGER_BASE
+from mv_gpu_manager import GPU_MANAGER_BASE
 from mv_vram import LTX2_VRAM_MB
 
 logger = logging.getLogger(__name__)

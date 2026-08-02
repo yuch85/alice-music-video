@@ -177,7 +177,7 @@ class RealSlingshotGate:
         self._client: "object | None" = None
 
     def __enter__(self) -> RealSlingshotGate:
-        from mv_slingshot import SlingshotClient  # deferred import
+        from mv_gpu_manager import SlingshotClient  # deferred import
 
         self._client = SlingshotClient(base_url=GPU_MANAGER_BASE_URL)
         self._client.ensure_hibernate()

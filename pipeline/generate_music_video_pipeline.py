@@ -140,7 +140,7 @@ from mv_comfyui import (
     COMFYUI_HOST, COMFYUI_PORT, COMFYUI_BASE, COMFYUI_OUTPUT_DIR,
 )
 import mv_comfyui
-from mv_slingshot import (
+from mv_gpu_manager import (
     SlingshotClient, _atexit_wake, _sigterm_handler, _register_slingshot_recovery,
     _RECOVERY_SLINGSHOT, GPU_MANAGER_HOST, GPU_MANAGER_PORT, GPU_MANAGER_BASE,
     is_local_llm_active,

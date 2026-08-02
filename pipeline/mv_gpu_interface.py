@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
-"""GPU manager protocol — abstraction over gpu-manager Slingshot endpoints.
+"""GPU manager protocol — abstraction over GPU management endpoints.
 
 Defines the interface that all GPU provider implementations must satisfy.
 Used by the music video pipeline to manage GPU state (hibernate/wake local
-LLM) without hard dependencies on private Alice infrastructure.
+LLM) without hard dependencies on private infrastructure.
 
 Provider selection is configuration-driven (MV_GPU_PROVIDER env var).
 The pipeline only imports this protocol; concrete providers are resolved
-through the mv_slingshot facade.
+through the mv_gpu_manager facade.
 """
 
 from __future__ import annotations
@@ -25,7 +25,7 @@ class GPUManagerProtocol(Protocol):
     """
 
     def status(self) -> dict[str, Any] | None:
-        """GET current GPU/Slingshot state.
+        """GET current GPU manager state.
 
         Returns:
             Dict with 'state', 'llm_active' keys, or None on error.

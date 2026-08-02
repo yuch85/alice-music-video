@@ -17,7 +17,7 @@ from pathlib import Path
 from typing import Any
 
 from mv_shot import _build_motion_prompt, _cycle_motion_templates
-from mv_slingshot import GPU_MANAGER_BASE, is_local_llm_active
+from mv_gpu_manager import GPU_MANAGER_BASE, is_local_llm_active
 
 logger = logging.getLogger(__name__)
 

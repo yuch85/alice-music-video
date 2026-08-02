@@ -1,12 +1,11 @@
 #!/usr/bin/env python3
-"""GPU manager facade — public repository (noop-only, no Slingshot dependency).
+"""GPU manager facade — public repository (noop-only).
 
 Slim facade for the alice-music-video public repository. Always loads
 NoopProvider — there is no gpu-manager in the public repo. All original
-mv_slingshot symbols are re-exported for backward compatibility with
-pipeline consumers.
+symbols are re-exported for backward compatibility with pipeline consumers.
 
-Provider: NoopProvider only (no env var dispatch, no Slingshot import).
+Provider: NoopProvider only (no env var dispatch, no external HTTP dependency).
 """
 
 from __future__ import annotations

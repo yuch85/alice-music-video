@@ -346,7 +346,7 @@ def _parse_args(argv: list[str]) -> argparse.Namespace:
 
 def main(argv: list[str]) -> int:
     """CLI entrypoint (invoked inside slingshot/exec)."""
-    from mv_slingshot import SlingshotClient
+    from mv_gpu_manager import SlingshotClient
 
     args = _parse_args(argv)
     slingshot = SlingshotClient()
