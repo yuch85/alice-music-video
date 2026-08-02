@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """SlingshotClient + Slingshot recovery wiring (Plan 09.9-08 + 09.9-09).
 
-Module is kept <= 400 lines per STYLE.md (YC-approved 400 ceiling deviation
+Module is kept <= 400 lines per STYLE.md (approved 400 ceiling deviation
 from the 300 default). Logic is byte-for-byte identical to the original
 `generate_music_video_pipeline.py` block this module was split from.
 """
@@ -79,7 +79,7 @@ def is_local_llm_active() -> bool:
     """Return True iff a local LLM is currently provisioned/active.
 
     Queries gpu-manager's /slingshot/status (the same signal the rest of the
-    pipeline uses). On a cloud-LLM session (alia-c / ishi-c) no local LLM is
+    pipeline uses). On a cloud-LLM session  (cloud-LLM) no local LLM is
     running, so this returns False. Used to skip ALL slingshot operations
     (hibernate + wake) when there is nothing to preserve (Finding 3).
     """

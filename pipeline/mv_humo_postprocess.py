@@ -32,7 +32,7 @@ HUMO_FIRST_FRAME_FIX_SRC_INDEX = 6
 FRAME0_FIX_COPY_COUNT = 6
 HUMO_FRAME0_FIX_MIN_FRAMES = 7  # need >= src_index+1 frames to apply the fix
 
-# F2 (S4 softness, APPROVED by YC 2026-07-17): prefer 4x-UltraSharp — a sharper
+# F2 (S4 softness, APPROVED): prefer 4x-UltraSharp — a sharper
 # Real-ESRGAN-family RRDBNet(x4) model — over the general-purpose RealESRGAN_x4plus.
 # 4x-UltraSharp shares the same RRDBNet arch (nf=64, nb=23, gc=32, scale=4) so the
 # existing loader works unchanged. UltraSharp must be supplied by the operator
@@ -45,7 +45,7 @@ HUMO_REALESRGAN_MODEL_FALLBACK = os.environ.get("HUMO_REALESRGAN_FALLBACK", "/pa
 def _resolve_realesrgan_model() -> str:
     """Resolve the active Real-ESRGAN model path (F2 UltraSharp swap).
 
-    Returns the UltraSharp path when the asset is present (YC-approved swap),
+    Returns the UltraSharp path when the asset is present (approved swap),
     otherwise the x4plus fallback with a warning. Keeps the pipeline runnable
     before the operator downloads 4x-UltraSharp.pth.
     """
@@ -78,7 +78,7 @@ HUMO_BG_SUBJECT_ALPHA_THRESH = 128  # rembg alpha above this = subject
 # S5 ghost fix (2026-07-18, REVISED): the plate's subject hole must read as SOFT
 # studio, never a person-shaped grey ghost. The first attempt (dilate-plate-hole
 # 24px + dilate-subject 6px) was wrong in direction — growing the hole makes it
-# HARDER to cover, and 6px can't span the upper-right offset YC saw. Correct:
+# HARDER to cover, and 6px can't span the upper-right offset observed. Correct:
 #   * feather the hole edge (no hard outline) + fill it with a HEAVY blur so the
 #     person dissolves into surrounding studio tone — an uncovered rim shows soft
 #     studio light, not a blurred person;

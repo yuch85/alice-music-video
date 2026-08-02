@@ -132,7 +132,7 @@ def _check_transcript_source(project_dir: Path, report: ValidationReport) -> Non
 
     try:
         data = json.loads(transcript.read_text())
-        # Check both field names — pipeline uses "source", modotte uses "audio_source"
+        # Check both field names — pipeline uses "source", legacy projects use "audio_source"
         audio_source = data.get("audio_source") or data.get("source", "UNKNOWN")
 
         if "vocals" in audio_source or "stem" in audio_source:

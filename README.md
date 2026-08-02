@@ -21,7 +21,7 @@ This repository focuses on **music video generation**. It does **not** generate 
 - Reference images (character portraits, scene compositions)
 - Optional lyrics file
 
-Reference images can be prepared using Qwen Image Edit (QVI), Flux, or other image generation tools. Music generation is outside the scope of this project (ACE-Step or other tools can be used upstream).
+Reference images can be prepared using Qwen Image Edit (QEI), Flux, or other image generation tools. Music generation is outside the scope of this project (ACE-Step or other tools can be used upstream).
 
 ## Workflow
 

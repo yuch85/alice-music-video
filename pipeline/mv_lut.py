@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Post-processing LUT generation (Plan 09.9 Plan 07 / 09.9-12).
 
-Module is kept <= 400 lines per STYLE.md (YC-approved 400 ceiling deviation
+Module is kept <= 400 lines per STYLE.md (approved 400 ceiling deviation
 from the 300 default). Extracted from mv_post.py in 09.9-12 to recover
 headroom (mv_post was 1 over the ceiling) and to isolate the stdlib-only
 LUT logic so mv_post can import it without any internal cycle.
@@ -17,7 +17,7 @@ from pathlib import Path
 
 logger = logging.getLogger(__name__)
 
-# ── Post-processing constants (Phase 09.9 Plan 07) ──
+# ── Post-processing constants () ──
 
 POST_PROCESS_LUT_DIR = os.path.join(
     os.path.dirname(os.path.dirname(os.path.abspath(__file__))),

@@ -1,4 +1,4 @@
-"""Aggregator for Phase 09.5 dialogue-capable I2AV workflow builders.
+"""Aggregator for dialogue-capable I2AV workflow builders.
 
 Split into per-model modules to honor good-dev-practices' 300-LOC cap and
 CONTEXT.md fallback rule 5 (per-builder 120-LOC ceiling). The per-model

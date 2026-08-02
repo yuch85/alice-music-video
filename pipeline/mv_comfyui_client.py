@@ -5,7 +5,7 @@ Holds the circuit-breaker counter (`self._consecutive_failures`) and all
 ComfyUI HTTP helpers as instance methods. STYLE "Classes for Stateful
 Services" + Manual DI: dependencies are constructor-injected.
 
-Module is kept <= 400 lines per STYLE.md (YC-approved 400 ceiling deviation
+Module is kept <= 400 lines per STYLE.md (approved 400 ceiling deviation
 from the 300 default). Logic is byte-for-byte identical to the original
 `generate_music_video_pipeline.py` ComfyUI helpers.
 """
@@ -206,7 +206,7 @@ class ComfyUIClient:
         failures, returns False immediately without waiting.
 
         min_free_mb: when provided, a REAL per-clip free-VRAM re-check runs
-            after ComfyUI is confirmed ready (fix for modotte-oide-1080p-oom:
+            after ComfyUI is confirmed ready (fix for high-res OOM:
             this gate was previously neutered — it only checked readiness +
             circuit breaker and NEVER looked at free VRAM). The value is the
             activation-transient headroom (mv_vram._activation_headroom_mb),

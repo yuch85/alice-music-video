@@ -1,6 +1,6 @@
 """ComfyUI workflow builder for Ovi image-to-audio-video (I2AV).
 
-Phase 09.5 Plan 03. Ovi (Character.AI) is an 11B I2AV model with native
+Ovi (Character.AI) is an 11B I2AV model with native
 `<S>..<E>` dialogue markers and `<AUDCAP>..<ENDAUDCAP>` ambient audio
 caption syntax. Every literal filename / node class name is copied
 verbatim from `.planning/phases/09.5-.../WAVE0_OVI.md`.

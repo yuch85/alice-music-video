@@ -92,7 +92,7 @@ Evaluates generated clips for quality. Identifies clips that need regeneration (
 
 ### 10. Assembly
 
-FFmpeg-based cascade timing assembles the clips into the final video. Applies the continuous audio overlay (the Yui gold standard), color grading via LUTs, and burns in ASS subtitles and credits.
+FFmpeg-based cascade timing assembles the clips into the final video. Applies the continuous audio overlay approach, color grading via LUTs, and burns in ASS subtitles and credits.
 
 **Input:** Clips, audio stems, storyboard
 **Output:** Final video (MP4)

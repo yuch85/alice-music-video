@@ -117,7 +117,7 @@ The keyframe is the continuity anchor. The prompt adds motion on top of it.
 
 ### Step 5: Format Prompts (LTX VRDG Prose Default)
 
-All prompts use LTX VRDG prose style by default. This is the proven format — Phase 09.9-28 A/B testing showed LTX VRDG prose produces superior camera motion, identity preservation, and composability.
+All prompts use LTX VRDG prose style by default. This is the proven format — extensive A/B testing showed LTX VRDG prose produces superior camera motion, identity preservation, and composability.
 
 **LTX VRDG Prose Rules:**
 - Camera as grammatical subject ("the camera pushes in slowly...")
@@ -214,12 +214,12 @@ prompts are written given that architectural fact.
    during the shot, it does not belong in the motion prompt.
 
 2. **One character identifier is enough.** Start with a bare name or role reference
-   ("Ishi", "Toru", "Naomi", "the two figures"). Do not re-describe clothing, hair
+   ("Character A", "Character B", "the two figures"). Do not re-describe clothing, hair
    style, or physical appearance. LTX reads these from the keyframe.
 
 3. **Lead with motion, not scene.** The first sentence should describe movement or
    action, not a static scene description. The keyframe IS the scene description.
-   Opening with "Close-up on Ishi's face in the rain" wastes tokens the keyframe
+   Opening with "Close-up on the character's face in the rain" wastes tokens the keyframe
    already provides.
 
 4. **Weather is for animation, not decoration.** Mention weather only when it creates
@@ -251,7 +251,7 @@ prompts are written given that architectural fact.
     CONVERGENCE, and BROLL shot requires the silence flag.
 
 8. **Two-character shots: animate both.** When the keyframe contains two characters,
-   describe what each one does. "Toru's shoulders ease, Naomi's eyes soften" not
+   describe what each one does. "Character A's shoulders ease, Character B's eyes soften" not
    "they look at each other". Specific micro-actions per character produce better
    temporal animation than generic group descriptions.
 

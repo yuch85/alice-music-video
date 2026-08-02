@@ -1,4 +1,4 @@
-"""Unit tests for the music video pipeline orchestrator (Phase 09.9 Plans 02 + 04).
+"""Unit tests for the music video pipeline orchestrator.
 
 Tests pure-logic functions that don't require GPU or external services:
 - Segment grouping (Whisper words -> 4-10s segments)
@@ -485,7 +485,7 @@ class TestSlingshotClient(unittest.TestCase):
 
 
 class TestControlledMode(unittest.TestCase):
-    """Tests for controlled mode — Phase 09.9 Plan 04."""
+    """Tests for controlled mode — ."""
 
     def test_shot_type_enum_values(self):
         """ShotType enum has expected values."""
@@ -620,7 +620,7 @@ class TestControlledMode(unittest.TestCase):
 
 
 class TestMCPTools(unittest.TestCase):
-    """Tests for MCP tool registration — Phase 09.9 Plan 04."""
+    """Tests for MCP tool registration — ."""
 
     def test_music_video_generate_refs_exists(self):
         """music_video_generate_refs MCP tool is registered in server.py."""
@@ -644,7 +644,7 @@ class TestMCPTools(unittest.TestCase):
 
 
 class TestLTX23Upgrade(unittest.TestCase):
-    """Tests for LTX-2.3 GGUF upgrade — Phase 09.9 Plan 05 Task 1."""
+    """Tests for LTX-2.3 GGUF upgrade —  Task 1."""
 
     def test_model_file_constant_is_ltx23_gguf(self):
         """LTX2_MODEL_FILE constant updated to LTX-2.3 GGUF filename."""
@@ -707,7 +707,7 @@ class TestLTX23Upgrade(unittest.TestCase):
 
 
 class TestAudioVAEConditioning(unittest.TestCase):
-    """Tests for Audio VAE conditioning — Phase 09.9 Plan 05 Task 2."""
+    """Tests for Audio VAE conditioning —  Task 2."""
 
     def test_build_workflow_with_audio_path(self):
         """build_ltx2_workflow with audio_path produces LoadAudio + LTXVAudioVAEEncode."""
@@ -779,7 +779,7 @@ class TestAudioVAEConditioning(unittest.TestCase):
 
 
 class TestPreRollPadding(unittest.TestCase):
-    """Tests for pre-roll/tail-loss padding — Phase 09.9 Plan 05 Task 3."""
+    """Tests for pre-roll/tail-loss padding —  Task 3."""
 
     def test_pre_roll_frames_constant(self):
         """PRE_ROLL_FRAMES constant exists and equals 4."""
@@ -802,7 +802,7 @@ class TestPreRollPadding(unittest.TestCase):
 
 
 class TestVRAMBudget(unittest.TestCase):
-    """Tests for VRAM budget hardening — Phase 09.9 Plan 05 Task 4."""
+    """Tests for VRAM budget hardening —  Task 4."""
 
     def test_ltx2_vram_mb_in_reasonable_range(self):
         """LTX2_VRAM_MB updated for LTX-2.3 GGUF + Audio VAE (~35000-42000)."""
@@ -876,7 +876,7 @@ class TestVRAMBudget(unittest.TestCase):
 
 
 class TestMotionTemplates(unittest.TestCase):
-    """Tests for motion template constants and cycling — Phase 09.9 Plan 06."""
+    """Tests for motion template constants and cycling — ."""
 
     def test_camera_motion_templates_has_12_items(self):
         """CAMERA_MOTION_TEMPLATES has exactly 12 items."""
@@ -940,7 +940,7 @@ class TestMotionTemplates(unittest.TestCase):
 
 
 class TestCreativeInputs(unittest.TestCase):
-    """Tests for creative input loading — Phase 09.9 Plan 06."""
+    """Tests for creative input loading — ."""
 
     def test_load_creative_inputs_empty_dict(self):
         """_load_creative_inputs returns empty dict for empty input."""
@@ -983,7 +983,7 @@ class TestCreativeInputs(unittest.TestCase):
 
 
 class TestLLMRefinement(unittest.TestCase):
-    """Tests for LLM prompt refinement — Phase 09.9 Plan 06."""
+    """Tests for LLM prompt refinement — ."""
 
     def _make_segments(self, count: int) -> list[ClipSegment]:
         """Helper: create mock ClipSegment list."""
@@ -1073,7 +1073,7 @@ class TestLLMRefinement(unittest.TestCase):
 
 
 class TestPipelineIntegration(unittest.TestCase):
-    """Tests for pipeline integration of prompt refinement — Phase 09.9 Plan 06."""
+    """Tests for pipeline integration of prompt refinement — ."""
 
     def test_run_pipeline_accepts_creative_input_args(self):
         """run_pipeline signature accepts creative input path parameters."""
@@ -1114,7 +1114,7 @@ class TestPipelineIntegration(unittest.TestCase):
 
 
 class TestPostProcessing(unittest.TestCase):
-    """Tests for post-processing chain — Phase 09.9 Plan 07 Task 1."""
+    """Tests for post-processing chain —  Task 1."""
 
     def test_post_process_constants_exist(self):
         """Post-processing constants are defined with expected defaults."""
@@ -1413,7 +1413,7 @@ class TestPostProcessing(unittest.TestCase):
 
 @unittest.skip("Private integration tests — require gpu-manager src.server, not in public repo")
 class TestMCPToolCreativeInputs(unittest.TestCase):
-    """Tests for MCP tool creative input params — Phase 09.9 Plan 07 Task 2.
+    """Tests for MCP tool creative input params —  Task 2.
 
     NOTE: These tests verify the gpu-manager ↔ pipeline integration boundary.
     They are retained for reference but skipped in the public repo.
@@ -1476,7 +1476,7 @@ class TestMCPToolCreativeInputs(unittest.TestCase):
         self.assertIn("scene_prompt", params)
 
 
-# ── Pipeline recovery tests (Phase 09.9 Plan 08, Wave 5b) ──────────
+# ── Pipeline recovery tests (pipeline recovery) ──────────
 
 
 class TestPipelineRecovery(unittest.TestCase):
@@ -1684,7 +1684,7 @@ class TestResolutionWiring(unittest.TestCase):
 class TestTimelineCompositeAndCoverage(unittest.TestCase):
     """Plan 09.9-12: timeline-aware composite + coverage-gap fillers + 18s split.
 
-    PART D (end-to-end modotte-oide re-run) is executed by the orchestrator via
+    PART D (end-to-end end-to-end re-run) is executed by the orchestrator via
     the gpu-manager MCP tools and is intentionally NOT covered here.
     """
 
@@ -1994,7 +1994,7 @@ class TestLTX2TwoStagePathA(unittest.TestCase):
 
 
 class TestCombinedGraphVRAM(unittest.TestCase):
-    """Task 3: combined base-gen+upscale graph VRAM budget vs fix/modotte guard."""
+    """Task 3: combined base-gen+upscale graph VRAM budget vs VRAM guard."""
 
     def test_combined_estimate_under_ceiling_with_cpu_encoder(self):
         """Combined graph fits 48GB (−2GB) with text-encoder CPU-offload + Slingshot."""

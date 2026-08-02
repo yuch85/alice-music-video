@@ -82,8 +82,8 @@ HUMO_REMBG_PADDING_COLOR = "white"
 # the source reference (full studio scene, RemBG-free) — the composite mats the
 # HuMo subject and places it over this plate so the studio background is
 # reconstructed after generation (HuMo cannot paint it, E7). Song-specific; the
-# modotte-oide fixture's reference image. Callers may override via bg_plate_path.
-HUMO_BG_PLATE_DEFAULT: Path | None = None  # Disabled — bg-composite rejected (YC: "ghosting worse")
+# sample project's reference image. Callers may override via bg_plate_path.
+HUMO_BG_PLATE_DEFAULT: Path | None = None  # Disabled — bg-composite rejected ("ghosting worse")
 
 # ── S5 studio-background directive (VRGDG-mirroring fix) ───────────────────────
 # VRGDG's HuMo renders backgrounds PROMPT-DRIVEN: a "Background and location"
@@ -303,7 +303,7 @@ def generate_humo_clip(
                       scene_context=scene_context)
     # S5 bg-preserving composite: matte the HuMo subject and composite over the
     # studio plate (approach b). Runs on the 848x480 base, before upscale.
-    # GATED — composite is disabled by default (YC rejected: "ghosting worse").
+    # GATED — composite is disabled by default (rejected: "ghosting worse").
     # Enable by passing an explicit bg_plate_path.
     if bg_plate_path is not None:
         composited = _stage(clip_index, "bg-composite", composite_bg_preserving,

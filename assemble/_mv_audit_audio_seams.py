@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Experimental audit: Simple Assembly audio trim/pad analysis.
 
-Answer YC's questions experimentally:
+Answer questions experimentally:
 - where is audio trimmed?
 - where is audio padded?
 - does trimming occur during silence?
@@ -21,7 +21,7 @@ from pathlib import Path
 from typing import NamedTuple
 
 _REPO = Path(os.environ.get("MV_PROJECT_DIR", "/path/to/project"))
-_MV = _REPO / "songs" / "music-videos" / "modotte-oide-yui"
+_MV = _REPO / "songs" / "music-videos" / "project-name"
 _AUDIO = _MV / "audio.mp3"
 _VOCALS = _MV / "stems" / "htdemucs" / "htdemucs" / "audio" / "vocals.wav"
 _SEGMENT_PLAN = _MV / "gen-output" / "segment_plan.json"

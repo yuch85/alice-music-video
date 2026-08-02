@@ -49,7 +49,7 @@ HUMO_FPS = 25
 """Production FPS (validated run-8/run-17). Note: builder default HUMO_FRAME_RATE=24."""
 
 HUMO_VALIDATED_STEPS = 4
-"""Sampler steps (YC reverted 8→4; run-17 confirmed 4 is the final value)."""
+"""Sampler steps (reverted 8→4; run-17 confirmed 4 is the final value)."""
 HUMO_VALIDATED_CFG = 1.0
 """Classifier-free guidance scale for the distilled LightX LoRA path (CFG=1.0)."""
 HUMO_VALIDATED_SHIFT = 10.0

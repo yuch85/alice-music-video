@@ -17,16 +17,16 @@ DEFAULT_CLIP_DURATION_S = 16
 """Default HuMo 14B clip duration (seconds).
 
 Within the 18s VRAM ceiling (09.9-19 probe); fewer clips / fewer stitch seams.
-8s remains the safety fallback for drift-prone segments; 6s is the YC floor.
+8s remains the safety fallback for drift-prone segments; 6s is the hard floor.
 """
 
 # ── Variable per-clip duration bounds (Plan 09.9-25-04, D-01 extension) ──
-# Safety fallback for drift-prone segments (8s; 6s is the YC floor). Defined
+# Safety fallback for drift-prone segments (8s; 6s is the hard floor). Defined
 # once here as the single source of truth; plan 02 aliases it in
 # mv_clip_generate.HUMO_FALLBACK_CLIP_DURATION_S so the two never drift.
 HUMO_FALLBACK_CLIP_DURATION_S = 8
 
-# YC-stated hard floor for any generated clip (6s). Below this the motion
+# document hard floor for any generated clip (6s). Below this the motion
 # coherence degrades; the pipeline refuses shorter requests.
 CLIP_DURATION_FLOOR_S = 6
 
@@ -97,7 +97,7 @@ means the conv-net output is still strongly re-noised and reconstructed, only ~1
 less refined — at most marginally softer, not pixelated.
 
 The audio path (BUG A lip-sync) and ffmpeg bitrate (BUG B) are untouched by this
-constant, so neither regresses. Visual sharpness of the 2-step refine is a YC
+constant, so neither regresses. Visual sharpness of the 2-step refine is a
 visual-QA item (human-verify checkpoint in the mv-generation-time debug session)."""
 
 # ── Tiled VAE decode overlap values (M-4) ──

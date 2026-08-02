@@ -11,7 +11,7 @@ The single module-scope `comfyui_client` singleton is the ONLY module-level
 mutable object (Manual DI). PRE_ROLL_FRAMES / TAIL_LOSS_FRAMES /
 MAX_CONSECUTIVE_COMFYUI_FAILURES live here as the canonical source.
 
-Module is kept <= 400 lines per STYLE.md (YC-approved 400 ceiling deviation
+Module is kept <= 400 lines per STYLE.md (approved 400 ceiling deviation
 from the 300 default).
 """
 
@@ -207,7 +207,7 @@ def _validate_and_migrate_ltx2_models() -> bool:
     if not all_ok:
         logger.error(
             "Some LTX-2.3 models are missing. Ensure all model files are in "
-            "the correct ComfyUI/models/ subdirectories. See Phase 09.9 docs."
+            "the correct ComfyUI/models/ subdirectories."
         )
 
     return all_ok

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Assemble final Modotte Oide Yui music video.
+"""Assemble final music video.
 
 Steps:
 1. Concatenate all 32 clips (clip_001_1080p.mp4 .. clip_032_1080p.mp4)
@@ -19,7 +19,7 @@ import time
 from pathlib import Path
 
 _REPO = Path(os.environ.get("MV_PROJECT_DIR", "/path/to/project"))
-_MV = _REPO / "songs" / "music-videos" / "modotte-oide-yui"
+_MV = _REPO / "songs" / "music-videos" / "project-name"
 _GEN = _MV / "gen-output"
 _CLIPS = _GEN / "clips"
 _AUDIO_FULL = _MV / "audio_original.mp3.bak"
@@ -34,9 +34,9 @@ log = logging.getLogger(__name__)
 
 # ── Credits config ──
 CREDITS_TEXT = """\
-Modotte Oide
+Song Title
 
-(Acoustic Plus)
+(Version)
 
 Performed by
 
@@ -168,7 +168,7 @@ def build_final_video(
     - credits (fade in/out)
     - audio (full track + silence for credits)
     """
-    output = _OUTPUT / "modotte-oide-yui-final.mp4"
+    output = _OUTPUT / "project-name-final.mp4"
     _OUTPUT.mkdir(parents=True, exist_ok=True)
 
     # Compute timing
@@ -251,7 +251,7 @@ def build_final_video(
 
 def main() -> int:
     log.info("=" * 60)
-    log.info("Modotte Oide Yui — Final Assembly")
+    log.info("Music Video — Final Assembly")
     log.info("=" * 60)
 
     _OUTPUT.mkdir(parents=True, exist_ok=True)
@@ -278,14 +278,14 @@ def main() -> int:
 
         # Step 5: Copy to downloads for WhatsApp
         import shutil
-        dl = _REPO / "downloads" / "modotte-oide-yui-final.mp4"
+        dl = _REPO / "downloads" / "project-name-final.mp4"
         shutil.copy2(final, dl)
         size_mb = dl.stat().st_size / (1024 * 1024)
         log.info("Copied to downloads: %.1f MB", size_mb)
 
         # Step 6: Publish to artifacts
-        artifact = _REPO / "artifacts" / "55d180e3-d2aa-48ff-b64e-9c60103f04fc"
-        shutil.copy2(final, artifact / "modotte-oide-yui-final.mp4")
+        artifact = _REPO / "artifacts" / "project-artifact-id"
+        shutil.copy2(final, artifact / "project-name-final.mp4")
         log.info("Published to artifacts")
 
     log.info("")

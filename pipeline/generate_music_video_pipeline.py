@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Automated LTX Music Video Pipeline Orchestrator (Phase 09.9 Plan 02).
+"""Automated LTX Music Video Pipeline Orchestrator.
 
 End-to-end pipeline:
   Stage 1 — Demucs stem separation (MTV-04)
@@ -299,9 +299,9 @@ def run_pipeline(
     # second reference for variety (optional, LTX-2 only).
     ltx_motion_prompt: str = "",
     reference_image_2: str = "",
-    # ── Pre-written prompts (Phase 09.9-29 / Issue 3) ──
+    # ── Pre-written prompts (pre-written prompt support) ──
     prompts_file: Path | None = None,
-    # ── Pilot mode (Phase 09.9-33-04) ──
+    # ── Pilot mode (pilot mode) ──
     max_clips: int | None = None,
 ) -> dict[str, Any]:
     """Execute the full music video pipeline.
@@ -600,7 +600,7 @@ def run_pipeline(
     # creative_inputs already loaded at Stage 2 start for b-roll prompt building.
     refined_prompts: list[dict[str, str]] = []
 
-    # Check for pre-written prompts (Phase 09.9-29 / Issue 3).
+    # Check for pre-written prompts (pre-written prompt support).
     # When pre-written VRDG prose prompts exist, use them directly for
     # singer segments and generate LLM prompts for b-roll/instrumental.
     # This avoids LLM chain-of-thought artifacts and prompt count mismatch.
@@ -638,7 +638,7 @@ def run_pipeline(
     slingshot_active = False
     slingshot = SlingshotClient() if slingshot_enabled else None
 
-    # Cloud-LLM guard (Finding 3): on a cloud session (alia-c / ishi-c) there
+    # Cloud-LLM guard (Finding 3): on a cloud session  (cloud-LLM) there
     # is no local LLM to preserve, so skip ALL slingshot operations. Otherwise
     # the atexit/SIGTERM recovery could load an untracked llama.cpp orphan that
     # squats GPU VRAM. is_local_llm_active() queries gpu-manager /slingshot/status.
@@ -1007,7 +1007,7 @@ def _run_controlled_mode(
     )
     result["timings"]["segment_refs"] = round(time.monotonic() - t0, 1)
 
-    # Generate approval dashboard (Phase 09.9-29 Stage 6)
+    # Generate approval dashboard (approval dashboard)
     dashboard_path = _generate_approval_dashboard(seg_plans, output_path, scene_prompt)
 
     # Write segment plan
@@ -1447,7 +1447,7 @@ def _validate_clip_duration(
 
 # ── Bug 2 instrumentation (technical debt, 2026-07-24) ──────────────
 # Bug 2: conditioning audio duration (seg.duration / plan) may differ from
-# measured video duration (8k+1 frame quantization). Deferred per YC decision —
+# measured video duration (8k+1 frame quantization). Deferred —
 # pilot passed acceptance without fix. Instrumentation logs discrepancy for
 # future reference; does NOT change runtime behaviour.
 # Revisit if: lip-sync drift reappears at longer clip counts or higher bitrates.
@@ -1637,7 +1637,7 @@ Examples:
              "Format: {\"prompts\": [...], \"beat_types\": [...]}.",
     )
 
-    # Post-processing args (Phase 09.9 Plan 07)
+    # Post-processing args ()
     parser.add_argument(
         "--lut", default=None,
         help="Path to .cube LUT file for color grading (default: Cine_Grade.cube)",

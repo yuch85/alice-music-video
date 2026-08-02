@@ -34,7 +34,7 @@ TWO_STAGE_VRAM_OVERHEAD_FRAC = 0.15
 was bogus: both single- and two-stage paths run exactly ONE full-res KSampler
 (single-stage node 3; two-stage refine node 41), so the VRAM PEAK is identical.
 Two-stage only retains a couple of extra small latent buffers — modelled as a
-flat additive (TWO_STAGE_RETAINED_LATENT_MB) instead. See modotte-oide-1080p-oom
+flat additive (TWO_STAGE_RETAINED_LATENT_MB) instead. See high-res-oom
 debug session + specialist review."""
 
 TWO_STAGE_RETAINED_LATENT_MB = 500
@@ -68,7 +68,7 @@ LTX2_VRAM_MB = 38000
 LTX2_BASE_WEIGHTS_MB = 28500
 """Weights + video/audio VAE + text-projection + ComfyUI CUDA overhead
 (text encoder EXCLUDED — added separately when GPU-resident).
-Recalibrated from measured ComfyUI baseline ~28.5GB (modotte-oide 2026-07-11)."""
+Recalibrated from measured ComfyUI baseline ~28.5GB ."""
 
 LTX2_ACT_PER_MP_MB = 2500
 """Path B conv net refine activation cost per megapixel. Recalibrated from 4500

@@ -44,7 +44,7 @@ except ImportError:
 # Default clip duration for HuMo segments: alias of the canonical 16s default in
 # mv_mvconst (single source of truth — NOT a second literal, so the two never drift).
 HUMO_DEFAULT_CLIP_DURATION_S = mv_mvconst.DEFAULT_CLIP_DURATION_S
-# D-01: safety fallback for drift-prone segments (8s; 6s is the YC floor).
+# D-01: safety fallback for drift-prone segments (8s; 6s is the hard floor).
 HUMO_FALLBACK_CLIP_DURATION_S = 8
 # 16:9, both divisible by 8 (benchmark-approved upscale path).
 HUMO_GEN_WIDTH = 848

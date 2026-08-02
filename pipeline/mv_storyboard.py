@@ -5,7 +5,7 @@ Classifies each beat with visual prioritisation metadata: narrative importance,
 visual weight, performance focus, emotional/visual intensity, shot scale,
 camera movement, coverage strategy, and rationale.
 
-Module is kept <= 600 lines per STYLE.md (YC-approved 400 ceiling deviation
+Module is kept <= 600 lines per STYLE.md (approved 400 ceiling deviation
 from the 300 default, extended for the 16-field dataclass and full
 classification pipeline).
 """

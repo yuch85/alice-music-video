@@ -40,9 +40,9 @@ def classify_segment_engine(
     by per-segment metadata — never by song name or reference image, so the
     pipeline stays generic for future reuse (D-06).
 
-    Rule (Phase 09.9-30 — LTX-first architecture):
+    Rule (LTX-first architecture):
         - "ltx2" for ALL segments by default. LTX-2.3 handles all clip types,
-          including lip-sync singer clips (proven in Phase 09.9-28 A/B
+          including lip-sync singer clips (proven in extensive A/B
           comparison). The combined workflow with golden settings produces
           quality comparable to HuMo for singer segments.
         - "humo" is only reached via explicit ``force_engine="humo"`` override
@@ -77,7 +77,7 @@ from mv_clip_generate import _generate_clip  # noqa: E402,F401
 # ── Per-segment audio-energy → motion phrasing (Option C / BUG A) ──
 # Replaces the static "one hand gesturing naturally" motion text with
 # energy-conditioned phrasing so clip motion matches the audio mood.
-# Calibrated on the modotte-oide run — adjust here, not inline.
+# Calibrated on initial run — adjust here, not inline.
 _ENERGY_CALM_CENTROID_HZ = 3300.0
 _ENERGY_VIGOROUS_CENTROID_HZ = 4300.0
 _ENERGY_ONSET_RATE_PER_S = 1.0

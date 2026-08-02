@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fix audio stutter in Modotte Oide Yui final video.
+"""Fix audio stutter in final music video.
 
 Root cause: Each clip has mono demucs vocals (not full track).
 Concatenating 32 clips = 32 audio seams with discontinuous vocals.
@@ -19,7 +19,7 @@ import time
 from pathlib import Path
 
 _REPO = Path(os.environ.get("MV_PROJECT_DIR", "/path/to/project"))
-_MV = _REPO / "songs" / "music-videos" / "modotte-oide-yui"
+_MV = _REPO / "songs" / "music-videos" / "project-name"
 _GEN = _MV / "gen-output"
 _CLIPS = _GEN / "clips"
 _SEGMENT_PLAN = _GEN / "segment_plan.json"
@@ -37,9 +37,9 @@ log = logging.getLogger(__name__)
 
 # ── Credits text ──
 CREDITS_LINES = [
-    "Modotte Oide",
+    "Song Title",
     "",
-    "(Acoustic Plus)",
+    "(Version)",
     "",
     "",
     "Performed by",
@@ -184,7 +184,7 @@ def build_final_with_original_audio(
     - Extend with silence for outro clips and credits tail
     - Single audio source = zero seam artifacts
     """
-    output = _OUTPUT / "modotte-oide-yui-final.mp4"
+    output = _OUTPUT / "project-name-final.mp4"
     _OUTPUT.mkdir(parents=True, exist_ok=True)
 
     # Timing calculations
@@ -275,15 +275,15 @@ def build_final_with_original_audio(
 
 def main() -> int:
     log.info("=" * 60)
-    log.info("Modotte Oide Yui — Audio Seam Fix")
+    log.info("Music Video — Audio Seam Fix")
     log.info("=" * 60)
 
     _OUTPUT.mkdir(parents=True, exist_ok=True)
 
     # Back up existing final
-    final = _OUTPUT / "modotte-oide-yui-final.mp4"
+    final = _OUTPUT / "project-name-final.mp4"
     if final.exists():
-        backup = _OUTPUT / "modotte-oide-yui-final-bak.mp4"
+        backup = _OUTPUT / "project-name-final-bak.mp4"
         shutil.move(str(final), str(backup))
         log.info("Backed up existing final to %s", backup)
 
@@ -303,14 +303,14 @@ def main() -> int:
         )
 
         # Step 4: Copy to downloads
-        dl = _REPO / "downloads" / "modotte-oide-yui-final.mp4"
+        dl = _REPO / "downloads" / "project-name-final.mp4"
         shutil.copy2(output, dl)
         log.info("Copied to downloads: %.1f MB", dl.stat().st_size / (1024*1024))
 
         # Step 5: Publish to artifacts
-        artifact = _REPO / "artifacts" / "55d180e3-d2aa-48ff-b64e-9c60103f04fc"
+        artifact = _REPO / "artifacts" / "project-artifact-id"
         if artifact.exists():
-            shutil.copy2(output, artifact / "modotte-oide-yui-final.mp4")
+            shutil.copy2(output, artifact / "project-name-final.mp4")
             log.info("Published to artifacts")
 
     log.info("")

@@ -128,7 +128,7 @@ For each shot in the shot list, determine the shot type based on:
 1. **Who is in frame** — singer, narrative character, both, or no one
 2. **Is the face visible** — CU/MCU makes mouth movement obvious; wide shots
    are less sensitive but still require the flag for consistency
-3. **Is anyone singing** — only the designated singer (e.g. Ishi) sings
+3. **Is anyone singing** — only the designated singer sings
 
 Then add `**Audio**: silence` to the prompt file for any non-singing shot.
 The flag goes in the shot metadata header, alongside Duration and Weather:

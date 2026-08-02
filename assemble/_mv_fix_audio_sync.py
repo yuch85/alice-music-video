@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Re-trim audio in already-trimmed clips to fix the 09.9-33 audio sync bug.
+"""Re-trim audio in already-trimmed clips to fix audio sync bug.
 
 The existing clip_XXX_up.mp4 files have video correctly trimmed (4 pre-roll
 + 4 tail-loss frames removed) but audio was not trimmed. This script trims
@@ -8,8 +8,8 @@ clip_XXX_up_fixed.mp4 files.
 
 Usage:
     uv run python scripts/_mv_fix_audio_sync.py \
-        --input songs/music-videos/modotte-oide-yui/gen-output/clips/ \
-        --output songs/music-videos/modotte-oide-yui/gen-output-option-a/clips/
+        --input songs/music-videos/project-name/gen-output/clips/ \
+        --output songs/music-videos/project-name/gen-output-option-a/clips/
 """
 
 from __future__ import annotations

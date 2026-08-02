@@ -11,8 +11,8 @@ import re
 import glob
 import sys
 
-DASHBOARD = "songs/music-videos/modotte-oide-turbo/dashboard-clips.html"
-PROMPT_DIR = "songs/music-videos/modotte-oide-turbo/prompts"
+DASHBOARD = "songs/music-videos/project-name/dashboard-clips.html"
+PROMPT_DIR = "songs/music-videos/project-name/prompts"
 
 
 def extract_motion_prompt(filepath: str) -> str | None:

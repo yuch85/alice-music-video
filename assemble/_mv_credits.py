@@ -22,7 +22,7 @@ CREDITS_FADE_OUT_S = 2.0
 TRAILING_BLACK_S = 1.0
 
 CREDITS_LINES = [
-    "Modotte Oide", "", "(Acoustic Plus)", "", "",
+    "Song Title", "", "(Version)", "", "",
     "Performed by", "", "ALICE", "", "",
     "Lyrics & Creative Direction", "", "ALICE", "", "",
     "An ALICE AI Production", "", "",

@@ -5,7 +5,7 @@ Functions: _group_words_into_segments, _classify_vocal_regions,
 _merge_short_segments, _fill_coverage_gaps, _split_long_segments,
 _validate_segment_plan, _write_segment_plan, _read_segment_plan.
 
-Kept <= 400 lines per STYLE.md (YC-approved 400 ceiling deviation).
+Kept <= 400 lines per STYLE.md (approved 400 ceiling deviation).
 """
 
 from __future__ import annotations
@@ -44,7 +44,7 @@ class ClipSegment:
     shot_type: str | None = None  # explicit shot type (e.g. "broll" filler from coverage)
 
 
-# ── Controlled mode types (Phase 09.9 Plan 04) ──
+# ── Controlled mode types  ──
 
 class ShotType(str, Enum):
     """Shot type for a segment in controlled mode."""

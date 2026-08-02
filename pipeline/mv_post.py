@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Post-processing + FFmpeg compositing stage.
 
-Module is kept <= 400 lines per STYLE.md (YC-approved 400 ceiling deviation
+Module is kept <= 400 lines per STYLE.md (approved 400 ceiling deviation
 from the 300 default). Logic is byte-for-byte identical to the original
 `generate_music_video_pipeline.py` block this module was split from.
 """
@@ -46,7 +46,7 @@ def _get_video_duration(video_path: str) -> float:
         logger.warning("Failed to get video duration for %s: %s", video_path, exc)
         return 0.0
 
-# Fixed video-only overlap (LOCKED decision D-03, Phase 09.9-25). At every clip
+# Fixed video-only overlap (LOCKED decision D-03, LOCKED decision D-03). At every clip
 # seam the next clip's VIDEO is delayed by this many seconds relative to its
 # AUDIO start, so during the overlap the listener hears clip i's audio while
 # seeing clip (i-1)'s video. Deterministic and non-adaptive — audio is re-muxed
@@ -205,7 +205,7 @@ def _composite_timeline_canvas(
     T-09.9-12-01: clip starts are clamped to finite >= 0 so no malformed
     ``enable=''`` is built.
 
-    Video overlap (LOCKED D-03, Phase 09.9-25): for every clip after the first
+    Video overlap (LOCKED D-03, LOCKED decision D-03): for every clip after the first
     (i >= 2) the VIDEO enable threshold is delayed by ``VIDEO_OVERLAP_S``
     relative to its audio start, so clip i's video appears 1s after its audio
     begins — masking seam artifacts (works with the frame-0 contrast fix).

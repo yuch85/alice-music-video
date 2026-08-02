@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Shot-type + pose/motion template helpers (Phase 09.9 Plan 04/06).
+"""Shot-type + pose/motion template helpers .
 
-Module is kept <= 400 lines per STYLE.md (YC-approved 400 ceiling deviation
+Module is kept <= 400 lines per STYLE.md (approved 400 ceiling deviation
 from the 300 default). Logic is byte-for-byte identical to the original
 `generate_music_video_pipeline.py` block this module was split from.
 """
@@ -15,7 +15,7 @@ from mv_segment import ClipSegment, ShotType
 
 logger = logging.getLogger(__name__)
 
-# ── Controlled mode helpers (Phase 09.9 Plan 04) ──
+# ── Controlled mode helpers ──
 
 # Pose variations for per-segment ref generation
 POSE_VARIATIONS = [
@@ -29,7 +29,7 @@ POSE_VARIATIONS = [
     "high angle looking down, vulnerable framing",
 ]
 
-# ── Motion templates (Phase 09.9 Plan 06) ──
+# ── Motion templates () ──
 # Cinematic motion language (verbs, not framing descriptions) that
 # LTX-2 responds to better than static framing cues.
 

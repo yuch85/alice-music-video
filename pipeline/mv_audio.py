@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Audio stage: Demucs stem separation, Whisper transcription, audio crop/trim.
 
-Module is kept <= 400 lines per STYLE.md (YC-approved 400 ceiling deviation
+Module is kept <= 400 lines per STYLE.md (approved 400 ceiling deviation
 from the 300 default). Logic is byte-for-byte identical to the original
 `generate_music_video_pipeline.py` block this module was split from.
 """

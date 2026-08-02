@@ -231,7 +231,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Cascade assembly (Option B)")
     parser.add_argument(
         "--output-dir",
-        default=str(_REPO / "songs" / "music-videos" / "modotte-oide-yui" / "gen-output"),
+        default=str(_REPO / "songs" / "music-videos" / "project-name" / "gen-output"),
         help="Path to gen-output directory",
     )
     parser.add_argument(
@@ -285,7 +285,7 @@ def main() -> int:
         p.unlink(missing_ok=True)
 
     if args.include_credits:
-        final_path = output_dir.parent / "final" / "modotte-oide-yui-cascade.mp4"
+        final_path = output_dir.parent / "final" / "project-name-cascade.mp4"
         add_credits(concat_path=concat_path, final_path=final_path,
                     total_duration=concat_dur)
         concat_path.unlink(missing_ok=True)

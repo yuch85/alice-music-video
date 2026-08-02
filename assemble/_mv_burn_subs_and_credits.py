@@ -28,11 +28,11 @@ TRANSCRIPT_PATH = Path(
 )
 INPUT_VIDEO = Path(
     os.environ.get("MV_OUTPUT_DIR", "output/")
-    "modotte-oide-yui-17seg-v2.mp4"
+    "project-name-17seg-v2.mp4"
 )
 OUTPUT_DIR = INPUT_VIDEO.parent
-V3_VIDEO = OUTPUT_DIR / "modotte-oide-yui-17seg-v3.mp4"
-FINAL_VIDEO = OUTPUT_DIR / "modotte-oide-yui-17seg-final.mp4"
+V3_VIDEO = OUTPUT_DIR / "project-name-17seg-v3.mp4"
+FINAL_VIDEO = OUTPUT_DIR / "project-name-17seg-final.mp4"
 DOWNLOADS_VIDEO = Path(os.environ.get("MV_INPUT_VIDEO", "input.mp4"))
 
 # --- Fonts ---

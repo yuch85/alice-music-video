@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Assemble final Modotte Oide Yui music video — optimized (stream copy concat).
+"""Assemble final music video — optimized (stream copy concat).
 
 Steps:
 1. Concatenate 32 clips via stream copy (no re-encode)
@@ -19,7 +19,7 @@ import time
 from pathlib import Path
 
 _REPO = Path(os.environ.get("MV_PROJECT_DIR", "/path/to/project"))
-_MV = _REPO / "songs" / "music-videos" / "modotte-oide-yui"
+_MV = _REPO / "songs" / "music-videos" / "project-name"
 _GEN = _MV / "gen-output"
 _CLIPS = _GEN / "clips"
 _AUDIO_FULL = _MV / "audio_original.mp3.bak"
@@ -39,9 +39,9 @@ log = logging.getLogger(__name__)
 
 # ── Credits text ──
 CREDITS_LINES = [
-    "Modotte Oide",
+    "Song Title",
     "",
-    "(Acoustic Plus)",
+    "(Version)",
     "",
     "",
     "Performed by",
@@ -176,7 +176,7 @@ def render_credits_image(path: Path) -> None:
 def build_final(clips_video: Path, clips_duration: float, credits_img: Path,
                 tmpdir: Path) -> Path:
     """Build final video with fade transitions and credits."""
-    output = _OUTPUT / "modotte-oide-yui-final.mp4"
+    output = _OUTPUT / "project-name-final.mp4"
     _OUTPUT.mkdir(parents=True, exist_ok=True)
 
     credits_start = clips_duration + FADE_TO_BLACK_S + BLACK_PAUSE_S
@@ -248,7 +248,7 @@ def build_final(clips_video: Path, clips_duration: float, credits_img: Path,
 
 def main() -> int:
     log.info("=" * 60)
-    log.info("Modotte Oide Yui — Final Assembly v2")
+    log.info("Music Video — Final Assembly v2")
     log.info("=" * 60)
 
     _OUTPUT.mkdir(parents=True, exist_ok=True)
@@ -267,13 +267,13 @@ def main() -> int:
         final = build_final(clips_video, clips_dur, credits_img, tmpdir)
 
         # Step 4: Copy to downloads
-        dl = _REPO / "downloads" / "modotte-oide-yui-final.mp4"
+        dl = _REPO / "downloads" / "project-name-final.mp4"
         shutil.copy2(final, dl)
         log.info("Copied to downloads: %.1f MB", dl.stat().st_size / (1024*1024))
 
         # Step 5: Publish to artifacts
-        artifact = _REPO / "artifacts" / "55d180e3-d2aa-48ff-b64e-9c60103f04fc"
-        shutil.copy2(final, artifact / "modotte-oide-yui-final.mp4")
+        artifact = _REPO / "artifacts" / "project-artifact-id"
+        shutil.copy2(final, artifact / "project-name-final.mp4")
         log.info("Published to artifacts")
 
     log.info("")

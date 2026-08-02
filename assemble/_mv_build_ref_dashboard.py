@@ -2,7 +2,7 @@
 """Build a per-segment reference image dashboard for the 18-segment plan.
 
 Maps existing refs (from the old 27-segment plan) to new segments by time overlap.
-Outputs a self-contained HTML dashboard for YC sign-off.
+Outputs a self-contained HTML dashboard for user sign-off.
 
 Usage:
     cd ~/alice && uv run scripts/_mv_build_ref_dashboard.py
@@ -13,7 +13,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-PROJECT = Path.home() / "alice" / "songs" / "music-videos" / "modotte-oide-yui"
+PROJECT = Path.home() / "alice" / "songs" / "music-videos" / "project-name"
 NEW_PLAN = PROJECT / "gen-output-18seg" / "transcript.json"
 OLD_PLAN = PROJECT / "gen-output" / "segment_plan.json"
 REFS_DIR = PROJECT / "gen-output" / "refs"
@@ -118,7 +118,7 @@ def build_html(segments_data: list[dict]) -> str:
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Modotte Oide — 18-Segment Reference Dashboard</title>
+<title>Music Video — Reference Dashboard</title>
 <style>
 :root {
   --bg: #0a0a0a; --surface: #141414; --border: #2a2a2a;
@@ -257,8 +257,8 @@ h1 { font-size: 1.6rem; margin-bottom: 0.25rem; }
 </style>
 </head>
 <body>
-<h1>Modotte Oide — 18-Segment Reference Dashboard</h1>
-<p class="subtitle">Per-segment reference image review for YC sign-off before LTX generation</p>
+<h1>Music Video — Reference Dashboard</h1>
+<p class="subtitle">Per-segment reference image review for user sign-off before LTX generation</p>
 
 <div class="stats">
   <div class="stat"><strong>SEGMENTS_PLACEHOLDER</strong>Segments</div>

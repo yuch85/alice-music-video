@@ -99,11 +99,11 @@ This skill does NOT rewrite any generation code. It consumes pre-production arte
 
 ## Engine Selection (LTX-2.3 Default, HuMo Fallback)
 
-LTX-2.3 is the default engine for all clip types. This was validated by Phase 09.9-28 A/B testing: LTX scored balanced 3s across all dimensions (lip sync, camera motion, identity preservation, background fidelity, composability) and produced the best video in 3 weeks of iteration.
+LTX-2.3 is the default engine for all clip types. This was validated by extensive A/B testing: LTX scored balanced across all dimensions (lip sync, camera motion, identity preservation, background fidelity, composability) and produced the best video in weeks of iteration.
 
 HuMo 14B remains available as an opt-in fallback for edge cases where LTX underperforms (e.g., extreme lip-sync precision requirements). To use HuMo for a specific clip, annotate the shot list entry with `engine: humo` or pass `per_clip_engines` with `"humo"` for that segment index.
 
-LTX golden settings (locked from 09.9-28): model `ltx-2.3-22b-distilled-1.1-Q6_K.gguf`, VRDG V5.1 sigma schedule, euler sampler, CFG=1.0, `use_vrdg_sigmas=True`, `use_lipdub=False`, `text_encoder_device="default"` (GPU). GPU encoder safe at 1080p — Jul 12 frame-count probe measured 31.2GB peak VRAM (18s clip, 1920x1088, combined workflow) with ~17GB headroom on 48GB card. CPU was conservative carryover from single-stage OOM (Jul 9); reverted to GPU Jul 31.
+LTX golden settings (locked): model `ltx-2.3-22b-distilled-1.1-Q6_K.gguf`, VRDG V5.1 sigma schedule, euler sampler, CFG=1.0, `use_vrdg_sigmas=True`, `use_lipdub=False`, `text_encoder_device="default"` (GPU). GPU encoder safe at 1080p — frame-count probe measured 31.2GB peak VRAM (18s clip, 1920x1088, combined workflow) with ~17GB headroom on 48GB card. CPU was conservative carryover from single-stage OOM; reverted to GPU subsequently.
 
 ## FSM Update
 

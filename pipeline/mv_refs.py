@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Per-segment reference image generation (Plan 09.9 Plan 04).
 
-Module is kept <= 400 lines per STYLE.md (YC-approved 400 ceiling deviation
+Module is kept <= 400 lines per STYLE.md (approved 400 ceiling deviation
 from the 300 default). Logic is byte-for-byte identical to the original
 `generate_music_video_pipeline.py` block this module was split from.
 
@@ -35,7 +35,7 @@ def _write_references_manifest(
 
     Plan 09.9-25-04 (D-04 option): when the caller supplies an explicit
     per-segment reference list, this surfaces the chosen reference per clip so
-    YC can QA each starting reference. It NEVER silently picks references — the
+    the user can review each starting reference. It NEVER silently picks references — the
     list is supplied by the caller.
 
     Args:
@@ -155,7 +155,7 @@ def _generate_segment_refs(
     instead of scene_prompt + pose_variation.
 
     Candidates are stored under ``refs/candidates/ref_<N>_<a/b/c>.jpg`` for
-    the approval dashboard (Phase 09.9-29 Stage 6).
+    the approval dashboard (approval dashboard).
     """
     refs_dir = output_dir / "refs"
     refs_dir.mkdir(parents=True, exist_ok=True)
@@ -185,7 +185,7 @@ def _generate_segment_refs(
         # filler shot_type (e.g. "broll") from the coverage step. Because the
         # coverage step pre-fills the gap, the following lyric segment's prev_end
         # is contiguous (gap=0), so _assign_shot_type now correctly labels it
-        # "singer" instead of mislabeling it "broll" (modotte-oide seg-7 fix).
+        # "singer" instead of mislabeling it "broll" (seg-7 fix).
         shot_type = seg.shot_type or _assign_shot_type(seg, i, len(segments), prev_end)
 
         logger.info("Generating refs for segment %d: [%s-%s] shot_type=%s %s...",
@@ -241,7 +241,7 @@ def _generate_approval_dashboard(
 ) -> Path:
     """Generate a self-contained HTML approval dashboard for reference images.
 
-    Phase 09.9-29 Stage 6: renders per-segment sections with metadata,
+    Approval dashboard: renders per-segment sections with metadata,
     candidate images side-by-side, and radio buttons for selection.
     Includes a 'Export Selections' button that compiles choices to JSON.
 

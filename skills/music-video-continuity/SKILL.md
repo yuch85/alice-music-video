@@ -116,7 +116,7 @@ A continuity-state variant is a persistent asset (not a per-shot keyframe) when:
 - The state change affects multiple shots across different segments
 - Consistency of the state (wetness level, clothing behavior, hair state) matters across those shots
 
-Example: "Ishi wet-state" — ivory chiffon dress, visibly damp and clinging slightly, wet hair (same style, dampened), natural makeup washed slightly by rain. This single variant covers all rain shots for Ishi, ensuring consistent wetness level.
+Example: "wet-state variant" — ivory chiffon dress, visibly damp and clinging slightly, wet hair (same style, dampened), natural makeup washed slightly by rain. This single variant covers all rain shots for the character, ensuring consistent wetness level.
 
 ## Key Design Principles
 

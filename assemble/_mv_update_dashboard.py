@@ -118,7 +118,7 @@ html = f'''<!DOCTYPE html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Modotte Oide — Clip QC Dashboard (32 clips)</title>
+<title>Music Video — Clip QC Dashboard (32 clips)</title>
 <style>
   :root {{
     --bg: #0a0a0a; --surface: #141414; --border: #2a2a2a;
@@ -208,7 +208,7 @@ html = f'''<!DOCTYPE html>
 </style>
 </head>
 <body>
-<h1>Modotte Oide Yui — Clip QC</h1>
+<h1>Music Video — Clip QC</h1>
 <p class="subtitle">32 LTX-2.3 clips · 1920×1080 · 88 BPM · Generated 2026-07-22 · 🔄 = QC retry · 🆕 = outro</p>
 
 <div class="stats">

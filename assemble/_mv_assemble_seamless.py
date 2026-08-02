@@ -27,7 +27,7 @@ import time
 from pathlib import Path
 
 _REPO = Path(os.environ.get("MV_PROJECT_DIR", "/path/to/project"))
-_MV = _REPO / "songs" / "music-videos" / "modotte-oide-yui"
+_MV = _REPO / "songs" / "music-videos" / "project-name"
 _GEN = _MV / "gen-output"
 _CLIPS = _GEN / "clips"
 _AUDIO = _MV / "audio.mp3"  # 155.83s original stereo track
@@ -43,9 +43,9 @@ log = logging.getLogger(__name__)
 
 # ── Credits text ──
 CREDITS_LINES = [
-    "Modotte Oide",
+    "Song Title",
     "",
-    "(Acoustic Plus)",
+    "(Version)",
     "",
     "",
     "Performed by",
@@ -342,7 +342,7 @@ def render_credits_image(path: Path) -> None:
 def build_final(clips_merged: Path, clips_duration: float,
                 tmpdir: Path) -> Path:
     """Build final video: clips (fade-out) -> black -> credits -> trailing black."""
-    output = _OUTPUT / "modotte-oide-yui-final.mp4"
+    output = _OUTPUT / "project-name-final.mp4"
     _OUTPUT.mkdir(parents=True, exist_ok=True)
 
     # Backup existing final
@@ -480,7 +480,7 @@ def verify_audio_seams(final_video: Path) -> bool:
 
 def main() -> int:
     log.info("=" * 60)
-    log.info("Modotte Oide Yui — Seamless Audio Assembly")
+    log.info("Music Video — Seamless Audio Assembly")
     log.info("=" * 60)
 
     # Step 1: Compute non-overlapping boundaries
@@ -531,14 +531,14 @@ def main() -> int:
         final = build_final(clips_merged, merged_dur, tmpdir)
 
         # Step 8: Copy to downloads
-        dl = _REPO / "downloads" / "modotte-oide-yui-final.mp4"
+        dl = _REPO / "downloads" / "project-name-final.mp4"
         shutil.copy2(final, dl)
         log.info("Copied to downloads: %.1f MB", dl.stat().st_size / (1024 * 1024))
 
         # Step 9: Publish to artifacts
-        artifact = _REPO / "artifacts" / "55d180e3-d2aa-48ff-b64e-9c60103f04fc"
+        artifact = _REPO / "artifacts" / "project-artifact-id"
         artifact.mkdir(parents=True, exist_ok=True)
-        shutil.copy2(final, artifact / "modotte-oide-yui-final.mp4")
+        shutil.copy2(final, artifact / "project-name-final.mp4")
         log.info("Published to artifacts")
 
     log.info("")

@@ -1,6 +1,6 @@
 """ComfyUI workflow builder for LTX-2.3 image-to-audio-video (I2AV).
 
-Phase 09.5 Plan 03. LTX-2.3 is Lightricks' joint audio-visual DiT, a single
+LTX-2.3 is Lightricks' joint audio-visual DiT, a single
 checkpoint containing DiT transformer + video VAE + audio VAE + vocoder.
 NATIVE_SPEECH=true per WAVE0_LTX2.md (architectural evidence + Lightricks
 example workflow Gemma-enhancer speech guidance).
@@ -9,12 +9,12 @@ Every literal filename / node class name is copied verbatim from
 `.planning/phases/09.5-.../WAVE0_LTX2.md` — mismatches produce garbled
 output, not errors.
 
-Phase 09.9 Plan 01 — VRAM optimizations:
+VRAM optimizations:
 - Tiled VAE decode (VAEDecodeTiled) as default
 - Two-stage sampling with AV latent separation (opt-in)
 - GGUF loader support (opt-in)
 
-Phase 09.9 Plan 05 — LTX-2.3 upgrade:
+ — LTX-2.3 upgrade:
 - LTX-2.3 GGUF model (Q6_K) with separate Video VAE + Text Projection
 - Audio VAE conditioning (LoadAudio + LTXVAudioVAEEncode branch)
 - Text projection loader for LTX-2.3 DiT compatibility
@@ -77,7 +77,7 @@ LTX2_NEGATIVE_PROMPT = (
     "low quality, blurry, static, distorted audio, silence, noise"
 )
 
-# ── VRDG sigma schedule (Phase 09.9-28, Wave 0) ────────────────────
+# ── VRDG sigma schedule () ────────────────────
 # Custom sigma schedule for base sampling — replaces KSampler's internal
 # sigma computation with the VRDG V5.1 9-step schedule. 9 entries = 9
 # DiT passes. Proven from the VRDG upscale subgraph (workflow_ltx2_upscale.py).
@@ -503,7 +503,7 @@ def _ltx2_latent_upscale_target(px: int) -> int:
     return px * _COMFYUI_LATENT_DIVISOR // LTX2_VAE_SPATIAL_FACTOR  # == px // 4
 
 
-# ── VRDG sigma sampler helper (Phase 09.9-28, Wave 0) ──────────────
+# ── VRDG sigma sampler helper () ──────────────
 def _ltx2_vrdg_sampler_nodes(
     model_ref: list,
     pos_ref: list,
@@ -803,12 +803,12 @@ def build_ltx2_workflow(
     dialogue), T2V (no ref, no dialogue). Mode is determined by the caller
     (ref_image_filename presence controls I2x vs T2x path).
 
-    VRAM optimizations (Phase 09.9):
+    VRAM optimizations:
       - use_tiled_vae (default True): VAEDecodeTiled instead of VAEDecode
       - use_two_stage (default False): low-res base sample → upscale → refine
       - model_file (default None): GGUF checkpoint path for UnetLoaderGGUF
 
-    Audio VAE conditioning (Phase 09.9 Plan 05):
+    Audio VAE conditioning ():
       - audio_path (default None): path to audio file in ComfyUI input/ for
         Audio VAE conditioning. When provided, feeds real audio through the
         Audio VAE instead of empty latents.
@@ -987,7 +987,7 @@ def build_ltx2_workflow(
         # Two-stage (Path A, Plan 09.9-13): sample at base res → separate AV →
         # bislerp upscale (node 40) → decode node 40 directly. The full-res
         # refine KSampler (former node 41) is REMOVED because it OOMs the 48GB
-        # card at high resolution (modotte-oide-1080p-oom: node 41
+        # card at high resolution (high-res-oom: node 41
         # torch.OutOfMemoryError). Node 42 decodes the node-40 bislerp latent;
         # the final 1920×1080 frame is produced by the ffmpeg stitch scale
         # branch, so only GENERATION res drops (delivered res stays 1080p).
@@ -1029,7 +1029,7 @@ def build_ltx2_workflow(
             # (Path A, Plan 09.9-13): node 40's LatentUpscale is decoded
             # DIRECTLY by node 42. The full-res refine KSampler (former node 41)
             # is REMOVED — it OOMs the 48GB card at high resolution
-            # (modotte-oide-1080p-oom debug: node 41 torch.OutOfMemoryError).
+            # (high-res-oom debug: node 41 torch.OutOfMemoryError).
             "40": {
                 "class_type": "LatentUpscale",
                 "inputs": {

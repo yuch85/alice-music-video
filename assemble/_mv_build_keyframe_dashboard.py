@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build keyframe QC review dashboard for Modotte Oide Turbo MV.
+"""Build keyframe QC review dashboard for music video.
 
 Reads shot metadata from prompt files and shot_list.md,
 scans keyframe directory, generates a self-contained HTML dashboard.
@@ -147,7 +147,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MV Keyframe QC — Modotte Oide Turbo</title>
+<title>MV Keyframe QC — Music Video</title>
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -487,7 +487,7 @@ body {
 <body>
 
 <div class="header">
-  <h1>MV Keyframe QC Review &mdash; Modotte Oide Turbo</h1>
+  <h1>MV Keyframe QC Review &mdash; Music Video</h1>
   <div class="status-bar">
     <span><span class="status-badge badge-total" id="badge-total">48</span> total</span>
     <span><span class="status-badge badge-approved" id="badge-approved">0</span> approved</span>
@@ -712,7 +712,7 @@ function gatherDecisions() {
   });
   return {
     exported_at: new Date().toISOString(),
-    project: "modotte-oide-turbo",
+    project: "project-name",
     total_shots: SHOTS.length,
     decisions_count: results.length,
     qc_results: results,

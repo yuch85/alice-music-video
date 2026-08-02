@@ -5,7 +5,7 @@ Translates Whisper timestamps into a structured beat sheet with narrative,
 emotional, and visual purpose per beat. Supports timeline gap-filling
 and clip duration splitting.
 
-Module is kept <= 400 lines per STYLE.md (YC-approved 400 ceiling deviation
+Module is kept <= 400 lines per STYLE.md (approved 400 ceiling deviation
 from the 300 default).
 """
 

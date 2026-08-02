@@ -14,7 +14,7 @@ Initialize a new music video project folder with FSM state tracking and folder s
 
 ## When to use
 
-- YC wants to start a new music video project.
+- The user wants to start a new music video project.
 - The user invokes `/music_video` for a song that does not yet have a project folder.
 - A project folder exists but needs state recovery (check `index.md` first).
 
@@ -22,7 +22,7 @@ Initialize a new music video project folder with FSM state tracking and folder s
 
 Collect these inputs BEFORE any file operations. Suggest defaults, require confirmation.
 
-1. **Project name** — Used as the folder name under `songs/music-videos/`. Lowercase, hyphens for spaces (e.g. `modotte-oide`).
+1. **Project name** — Used as the folder name under `songs/music-videos/`. Lowercase, hyphens for spaces (e.g. `song-title`).
 
 2. **Audio file path** — Path to the full song file (`.mp3`, `.wav`, `.flac`). Must be a valid, readable file.
 

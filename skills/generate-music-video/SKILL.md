@@ -1,6 +1,6 @@
 ---
 name: generate-music-video
-description: Generate a beat-aligned music video from a song using the Phase 09.9 LTX-2 pipeline (Demucs -> Whisper -> scene-locked portrait -> LTX-2 clips -> FFmpeg composite). Covers mode choice, the human inputs to collect, where to write them, the resolution/aspect gotcha, and the controlled-run recipe.
+description: Generate a beat-aligned music video from a song using the LTX-2 pipeline (Demucs -> Whisper -> scene-locked portrait -> LTX-2 clips -> FFmpeg composite). Covers mode choice, the human inputs to collect, where to write them, the resolution/aspect gotcha, and the controlled-run recipe.
 allowed-tools:
   - Read
   - Write
@@ -15,15 +15,15 @@ allowed-tools:
 
 # /generate-music-video
 
-Generate a beat-aligned music video from an audio track using the Phase 09.9 pipeline. The pipeline separates stems (Demucs), aligns lyrics (Whisper), builds a scene-locked reference portrait, generates one LTX-2 clip per beat, then composites with FFmpeg.
+Generate a beat-aligned music video from an audio track using the LTX-2 pipeline. The pipeline separates stems (Demucs), aligns lyrics (Whisper), builds a scene-locked reference portrait, generates one LTX-2 clip per beat, then composites with FFmpeg.
 
 ## When to use
-- YC wants a music video from a song in `songs/`.
-- He wants a quick draft without the structured pre-production workflow.
+- The user wants a music video from a song in `songs/`.
+- They want a quick draft without the structured pre-production workflow.
 
 **NOTE:** This is the legacy quick-run skill. For new projects, use `/music_video` which provides the structured FSM-driven workflow with stage gating, human approval gates, and the keyframe pipeline.
 
-## Structured Workflow (Phase 09.9-29)
+## Structured Workflow
 
 For a structured creative pre-production workflow, use `/music_video` instead. The new workflow provides:
 creative interview, director's treatment, continuity bible, beat sheet, visual storyboard,
@@ -33,7 +33,7 @@ shot list, reference image approval, prompt generation, pre-generation validatio
 
 ## Two modes
 - **Auto** — `alice_generate_music_video`: one-shot, fully automated. Quick draft only.
-- **Controlled** (recommended) — `music_video_generate_refs` -> YC approves per-beat refs -> `music_video_generate_clips`. Per-beat creative control.
+- **Controlled** (recommended) — `music_video_generate_refs` -> user approves per-beat refs -> `music_video_generate_clips`. Per-beat creative control.
 
 ## Collect these human inputs FIRST
 
@@ -76,7 +76,7 @@ inject the uv-venv nvidia lib dirs at launch time (see `reference_mv_pipeline_ru
 ## Controlled-run recipe
 1. Ensure portrait + audio exist; write creative-input files if B-roll/narrative wanted.
 2. `music_video_generate_refs` with creative-input paths. Returns `segment_plan.json` + `ref_images`.
-3. Show YC the ref images / segment plan; get approval.
+3. Show the user the ref images / segment plan; get approval.
 4. `music_video_generate_clips` on the same `output_dir`.
 5. Verify: `ffprobe` the `final_output.mp4` (codec, duration matches audio, resolution).
 

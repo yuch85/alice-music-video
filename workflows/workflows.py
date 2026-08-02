@@ -6,7 +6,7 @@ Each builder returns a ComfyUI API-format dict ready for /prompt submission.
 CRITICAL: Model filenames and CLIPLoader types MUST match the verified inventory.
 Wrong values produce garbled output, not errors (Pitfall 1 in research).
 
-Phase 09.5 dialogue builders (LTX-2 + Ovi I2AV) live in
+LTX and Ovi dialogue builders (LTX-2 + Ovi I2AV) live in
 `src/workflow_dialogue.py` and are re-exported from this module for
 backward-compatible imports.
 """
@@ -777,7 +777,7 @@ def build_qwen_t2i_workflow(
 
 FLUX_I2I_DEFAULT_DENOISE = 0.6
 
-# PuLID-Flux2 face-identity conditioning (Phase 09.4).
+# PuLID-Flux2 face-identity conditioning.
 # Klein weights work for both Flux.2 Klein and Flux.2 Dev — no Dev-specific file on HuggingFace.
 # v2 is preferred over v1 per Fayens/Pulid-Flux2 repo (both shipped together; v2 is the newer iteration).
 PULID_FLUX2_WEIGHTS = "pulid_flux2_klein_v2.safetensors"
@@ -1785,7 +1785,7 @@ def build_sana_t2i_workflow(
     }
 
 
-# ── Phase 09.5 dialogue builders (re-exported from workflow_dialogue) ──
+# ── LTX and Ovi dialogue builders (re-exported from workflow_dialogue) ──
 # Import placed at module tail to avoid circular import: workflow_dialogue
 # imports `_make_seed` from this module.
 
