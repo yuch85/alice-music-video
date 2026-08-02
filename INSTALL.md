@@ -30,7 +30,7 @@ Install via ComfyUI Manager or clone manually into `ComfyUI/custom_nodes/`.
 | **ComfyUI-MelBandRoFormer** | `ComfyUI-MelBandRoFormer` | Audio processing |
 | **ComfyUI-Ovi** | `ComfyUI-Ovi` | Ovi nodes |
 | **comfyui_essentials** | `ComfyUI_Essentials` | Utility nodes (type conversions) |
-| **comfyui-vrgamedevgirl** | `vrgamedev` or clone from [VRGameDevGirl](https://github.com/vrgamedevgirl) | VRGDG custom nodes (grain, color match, upscale subgraph) |
+| **comfyui-vrgamedevgirl** | `vrgamedev` or clone from [VRGameDevGirl](https://github.com/vrgamegirl19/comfyui-vrgamedevgirl) | VRGDG custom nodes (grain, color match, upscale subgraph) |
 
 #### Utility Nodes
 

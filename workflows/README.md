@@ -22,7 +22,7 @@ workflows/
 
 | File | Model | Mode | Description |
 |------|-------|------|-------------|
-| `wan_humo_mvc_v9.json` | Wan2.1-HuMo 14B | Full MVC | Primary HuMo music video creator, V9 |
+| `wan_humo_mvc_v9.json` | Wan2.1-HuMo 14B | Full MVC | HuMo fallback music video creator, V9 |
 | `wan_humo_mvc_v81.json` | Wan2.1-HuMo 14B | Full MVC | HuMo MVC V8.1 (previous stable) |
 | `humo_manual_mode.json` | Wan2.1-HuMo 14B | Manual | Manual HuMo mode for per-clip control |
 | `z_image_wan_humo_mvc.json` | Z-Image + Wan | Full MVC | Z-Image with Wan HuMo MVC |

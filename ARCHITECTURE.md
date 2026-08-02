@@ -33,7 +33,7 @@ Visual classification of each beat: weight, performance focus, shot scale, emoti
 
 ### 4. Shot Planning
 
-Assigns shot types, poses, and camera motion per segment. Determines which segments use HuMo (singing/talking) vs. LTX (b-roll, atmosphere).
+Assigns shot types, poses, and camera motion per segment. All segments default to LTX-2.3; HuMo is available as a fallback engine override.
 
 **Input:** Storyboard, treatment
 **Output:** `segment_plan.json`, `plan.json`
@@ -70,8 +70,8 @@ Runs 15+ prerequisite checks before GPU-intensive generation begins. Validates s
 ### 8. Clip Generation
 
 Routes each segment to the appropriate engine:
-- **LTX-2.3** for b-roll, atmosphere, and non-speaking shots
-- **HuMo 14B** for singing lip-sync and talking-head shots
+- **LTX-2.3** (default) for all shots — uses audio vocal stem conditioning for lip-sync on singing segments
+- **HuMo 14B** as fallback when vocal conditioning is unavailable or explicitly overridden
 - Hybrid clips may combine both
 
 Generation respects VRAM constraints with automatic fallback.
@@ -123,8 +123,8 @@ The pipeline detects available VRAM and adjusts accordingly:
 ### Hybrid Routing
 
 Not every clip needs the same engine. The pipeline routes segments based on content:
-- HuMo for singing/talking (lip-sync required)
-- LTX-2.3 for b-roll, atmosphere, establishing shots
+- LTX-2.3 (default) for all segments, with audio vocal stem conditioning for lip-sync
+- HuMo as fallback when vocal conditioning is unavailable
 - Per-clip engine override via `--per-clip-engines`
 
 **Module:** `pipeline/mv_clip_generate.py`

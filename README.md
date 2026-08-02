@@ -6,8 +6,8 @@ AI-native pipeline for generating narrative music videos.
 
 A planning-driven pipeline for generating narrative music videos using open-source models. Creative decisions drive generation, not the other way around.
 
-- **LTX-2.3** video generation with spatial upscaling
-- **HuMo 14B** talking-head for singing lip-sync
+- **LTX-2.3** video generation with spatial upscaling and audio vocal stem conditioning for lip-sync
+- **HuMo 14B** talking-head as fallback when vocal conditioning is unavailable
 - **Planning-first** workflow: storyboard, shot list, and beat sheet precede every GPU pass
 - **Resume-aware**: pipeline can resume from any stage after interruption
 - **VRAM-aware**: automatic fallback from two-stage to single-stage upscale based on available GPU memory
@@ -35,7 +35,7 @@ Music Track -> Audio Analysis -> Beat Sheet -> Storyboard -> Shot Plan
 
 - **Claude Code skills** drive the pre-production planning phases (interview, treatment, storyboard, shot list, prompts)
 - **Python pipeline** handles audio analysis, clip generation, and assembly
-- **ComfyUI workflows** handle LTX-2.3 video generation, HuMo talking-head, and upscaling
+- **ComfyUI workflows** handle LTX-2.3 video generation, upscaling, and HuMo talking-head (fallback)
 - **FFmpeg** handles final assembly, color grading, and subtitle burning
 
 ## Requirements
@@ -87,7 +87,7 @@ docs/              Setup and operational documentation
 
 ## Acknowledgements
 
-This project builds heavily upon the excellent work of the [VRGameDevGirl](https://github.com/vrgamedevgirl) repository and community.
+This project builds heavily upon the excellent work of the [VRGameDevGirl](https://github.com/vrgamegirl19/comfyui-vrgamedevgirl) repository and community.
 Many architectural ideas, ComfyUI workflows, and custom nodes originated from that project.
 This repository is licensed under AGPLv3 in keeping with the upstream licensing philosophy.
 

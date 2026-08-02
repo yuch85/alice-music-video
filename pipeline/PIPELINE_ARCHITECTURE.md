@@ -146,11 +146,11 @@ Code: `mv_clip_generate.py:_generate_clip()` lines 218-325.
 
 ### Hybrid Router
 
-`_route_segment()` (line 339) is the single dispatch point. It decides per-segment whether to use LTX-2 or HuMo 14B based on:
+`_route_segment()` (line 339) is the single dispatch point. All segments default to LTX-2.3 with audio vocal stem conditioning for lip-sync. HuMo 14B is available as a fallback, routed when:
 - `force_engine` parameter (explicit override)
 - `classify_segment_engine()` (automatic: vocal presence + lyrics)
 
-LTX-2 handles singer/instrumental/b-roll shots. HuMo 14B handles dedicated lip-sync segments. The router creates a copy of the segment with cascade timing overrides (lines 408-421) so conditioning audio uses cascade positions.
+The router creates a copy of the segment with cascade timing overrides (lines 408-421) so conditioning audio uses cascade positions.
 
 ---
 

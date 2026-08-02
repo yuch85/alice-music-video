@@ -14,8 +14,8 @@ The pipeline is managed by a resumable, 12-stage FSM. State is serialized to an 
 
 ### 2.2 Dual-Engine Video Generation
 Video segments are intelligently routed to one of two physical backend diffusion pipelines based on chronological and semantic needs:
-*   **HuMo 14B (Audio-Conditioned):** Routed for "singer" clips requiring phoneme-accurate lip-syncing. Driven by the vocals stem; outputs at 848x480 native, upscaled to 1080p.
-*   **LTX-2.3 (I2V Cinematic):** Routed for "B-roll" and narrative scenes. Utilizes a low-res base generation (960x544) combined with a VRGDG latent-to-latent upscaler (Path B) to produce pristine 1920x1080 cinematic video.
+*   **LTX-2.3 (I2V Cinematic):** Primary engine for all segments. Uses audio vocal stem conditioning for lip-sync on singing clips. Low-res base generation (960x544) combined with a VRGDG latent-to-latent upscaler (Path B) to produce pristine 1920x1080 cinematic video.
+*   **HuMo 14B (Fallback):** Available when vocal conditioning is unavailable or when explicitly overridden. Outputs at 848x480 native, upscaled to 1080p. Quality is inferior to LTX vocal conditioning.
 
 ### 2.3 Slingshot VRAM Arbitration
 Orchestrating local LLMs alongside heavy video diffusion models on a single 48GB GPU requires dynamic context swapping. When the FSM shifts from *Planning* to *Execution*, the `Slingshot` service hibernates the local LLM, clearing VRAM for ComfyUI. Upon completion, the LLM is restored into memory to evaluate the FSM output.
