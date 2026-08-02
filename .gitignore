@@ -1,0 +1,135 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg/
+
+# Virtual environments
+.venv/
+venv/
+env/
+*/venv/
+*/env/
+
+# Environment / secrets
+.env
+.env.local
+.env.*.local
+!.env.example
+!.example
+
+# User projects
+projects/
+project_*/
+songs/
+music/
+
+# Audio inputs/outputs
+*.mp3
+*.wav
+*.flac
+*.ogg
+*.aac
+*.m4a
+*.wma
+
+# Video outputs
+*.mp4
+*.mkv
+*.avi
+*.mov
+*.webm
+*.ts
+*.mts
+*.m2ts
+
+# Image outputs (generated)
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.bmp
+*.tiff
+*.webp
+*.ico
+*.svg
+
+# Subtitle files
+*.srt
+*.ass
+*.ssa
+*.vtt
+
+# Segment plans and project state
+segment_plan.json
+transcript.json
+prompts.json
+storyboard.json
+plan.json
+index.md
+
+# ComfyUI outputs
+comfyui_output/
+ComfyUI/output/
+ComfyUI/input/
+
+# Generated media directories
+keyframes/
+clips/
+generated/
+renders/
+outputs/
+artifacts/
+temp/
+tmp/
+
+# Caches
+.cache/
+*.cache
+.huggingface/
+thunderbird/
+
+# Logs
+*.log
+logs/
+
+# Model checkpoints (users download these)
+*.safetensors
+*.ckpt
+*.bin
+*.pth
+*.pt
+
+# Demucs / audio processing outputs
+demucs_output/
+stems/
+
+# Whisper outputs
+whisper_output/
+*.txt
+
+# Dashboard HTML (regenerated)
+*_dashboard.html
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Node (for dashboard tools)
+node_modules/
+package-lock.json

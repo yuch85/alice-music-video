@@ -1,0 +1,98 @@
+{
+  "source_workflow": "vrgdg_upscale_workflow.json",
+  "source_url": "https://raw.githubusercontent.com/vrgamegirl19/comfyui-vrgamedevgirl/main/Workflows/LTX-2_Workflows/LTX%202.3%20Music%20Video%20Creator%20V5.1/LTX2.3_Music_Video_Creator_I2V_V5.1.json",
+  "subgraph_name": "Model upscale",
+  "extraction_note": "The 10-node upscale sub-graph is nested inside definitions.subgraphs['Model upscale'] (NOT at top level of the UI-format JSON). _extract_upscale_subgraph() reads the UI-format JSON, locates the 'Model upscale' subgraph, converts its 10 nodes to API format, and re-homes them with their original VRGDG node ids. If the named subgraph is absent, it falls back to top-level `nodes` (legacy format).",
+  "upscale_node_class_types": [
+    "LTXVSeparateAVLatent",
+    "LTXVCropGuides",
+    "LTXVLatentUpsampler",
+    "LTXVImgToVideoInplace",
+    "LTXVConcatAVLatent",
+    "SamplerCustomAdvanced",
+    "KSamplerSelect",
+    "CFGGuider",
+    "RandomNoise",
+    "ManualSigmas"
+  ],
+  "nodes": {
+    "220": {
+      "class_type": "LTXVSeparateAVLatent",
+      "emitted_node_id": "220",
+      "adaptation": "av_latent input rewired from VRGDG subgraph input slot 7 (-10) to our LTXVConcatAVLatent (node 54). Splits our joint AV latent into video (slot 0) + audio (slot 1); audio feeds ConcatAV(190) (D-09)."
+    },
+    "222": {
+      "class_type": "LTXVCropGuides",
+      "emitted_node_id": "222",
+      "adaptation": "positive/negative rewired to our LTXVConditioning (node 15); latent from SeparateAV(220) video output. Crops guide frames before upscale (D-08)."
+    },
+    "192": {
+      "class_type": "LTXVLatentUpsampler",
+      "emitted_node_id": "192",
+      "adaptation": "upscale_model rewired to our LatentUpscaleModelLoader (node 60); vae to our VAELoader (node 31); samples from CropGuides(222). 2x spatial conv net."
+    },
+    "221": {
+      "class_type": "LTXVImgToVideoInplace",
+      "emitted_node_id": "221",
+      "adaptation": "vae from node 31; image from our LoadImage(14, portrait); latent from Upsampler(192). strength FORCED 1.0, bypass FORCED False (D-07). Never LTXVImgToVideoConditionOnly."
+    },
+    "190": {
+      "class_type": "LTXVConcatAVLatent",
+      "emitted_node_id": "190",
+      "adaptation": "video_latent from Inplace(221); audio_latent from SeparateAV(220) audio output. Recombines AV latent before sampler (D-09)."
+    },
+    "207": {
+      "class_type": "SamplerCustomAdvanced",
+      "emitted_node_id": "207",
+      "adaptation": "noise/guider/sampler/sigmas/latent_image wired within subgraph. Output (slot 0) feeds our decode-side SeparateAV(230)."
+    },
+    "187": {
+      "class_type": "KSamplerSelect",
+      "emitted_node_id": "187",
+      "adaptation": "sampler_name FORCED 'euler' (D-05). Never 'euler_cfg_pp'."
+    },
+    "188": {
+      "class_type": "CFGGuider",
+      "emitted_node_id": "188",
+      "adaptation": "cfg FORCED LTX2_DEFAULT_CFG (1.0, D-06); model from UnetLoaderGGUF(1); positive/negative from CropGuides(222)."
+    },
+    "189": {
+      "class_type": "RandomNoise",
+      "emitted_node_id": "189",
+      "adaptation": "noise_seed from _make_seed(seed); generator='fixed'."
+    },
+    "208": {
+      "class_type": "ManualSigmas",
+      "emitted_node_id": "208",
+      "adaptation": "sigmas FORCED LTX2_UPSCALE_REFINEMENT_SIGMAS = '0.909375, 0.725, 0.421875, 0.0' (D-04 full-denoise schedule)."
+    }
+  },
+  "subgraph_input_slot_map": {
+    "0": "UnetLoaderGGUF(1) MODEL",
+    "1": "LTXVConditioning(15) positive",
+    "2": "LTXVConditioning(15) negative",
+    "3": "LatentUpscaleModelLoader(60) upscale_model",
+    "4": "VAELoader(31) VAE",
+    "5": "LoadImage(14) IMAGE (reference portrait)",
+    "6": "FORCED False (bypass) -- not wired from subgraph input",
+    "7": "LTXVConcatAVLatent(54) av_latent (our constructed joint AV latent)"
+  },
+  "filename_remaps_d10": {
+    "LTX-2.3-22B-distilled-1.1-Q6_K.gguf": "LTX2_MODEL_FILE (workflow_ltx2)",
+    "LTX23_video_vae_bf16.safetensors": "LTX2_VAE_FILE (workflow_ltx2)",
+    "LTX23_audio_vae_bf16.safetensors": "LTX2_AUDIO_VAE_FILE (workflow_ltx2)",
+    "gemma-3-12b-it-abliterated-sikaworld-high-fidelity-edition.safetensors": "LTX2_TEXT_ENCODER_FILE (workflow_ltx2)",
+    "ltx-2.3_text_projection_bf16.safetensors": "LTX2_TEXT_PROJECTION_FILE (workflow_ltx2)",
+    "ltx-2.3-spatial-upscaler-x2-1.1.safetensors": "UPSCALE_MODEL_FILENAME (mv_mvconst)"
+  },
+  "locked_params_enforced_at_runtime": {
+    "sampler": "euler (D-05)",
+    "sigmas": "0.909375, 0.725, 0.421875, 0.0 (D-04)",
+    "cfg": "1.0 (D-06)",
+    "inplace_strength": "1.0 (D-07)",
+    "inplace_bypass": "False (D-07)",
+    "condition_only_node": "ABSENT (D-07)",
+    "crop_guides": "PRESENT (D-08)",
+    "audio_latent": "CARRIED THROUGH (D-09)"
+  }
+}
